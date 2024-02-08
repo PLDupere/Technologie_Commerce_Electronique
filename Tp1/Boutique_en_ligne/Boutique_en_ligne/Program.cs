@@ -10,6 +10,7 @@ app.UseMvc(routes =>
         defaults: new { controller = "Inscription", action = "Inscription" } 
     );
 
+
     routes.MapRoute(
         name: "Authentification", 
         template: "Authentification/Authentification", 

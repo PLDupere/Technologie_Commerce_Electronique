@@ -1,8 +1,6 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model Boutique_en_ligne.Models.Utilisateur
 
-@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
     Layout = "_Layout";
 }
@@ -13,18 +11,14 @@
             <div class="card">
                 <div class="card-header text-center"><h5 class="font-weight-bold">Formulaire de connexion</h5></div>
                 <div class="card-body">
-                    <form>
+                    <form asp-controller="Authentification" asp-action="Connecter" method="post">
                         <div class="form-group mb-4">
-                            <label for="email"><i class="bi bi-envelope-fill"></i> Adresse Courriel</label>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="Votre adresse courriel" required>
+                            <label for="adresse_courriel"><i class="bi bi-envelope-fill"></i> Adresse Courriel</label>
+                            <input type="email" asp-for="adresse_courriel" class="form-control" placeholder="Votre adresse courriel" required>
                         </div>
                         <div class="form-group mb-4">
-                            <label for="password"><i class="bi bi-lock-fill"></i> Mot de Passe</label>
-                            <input type="password" class="form-control" id="password" name="password" placeholder="Mot de passe" required>
-                        </div>
-                        <div class="form-group mb-4">
-                            <label for="confirmPassword"><i class="bi bi-lock-fill"></i> Confirmer Mot de Passe</label>
-                            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirmer mot de passe" required>
+                            <label for="mot_de_passe"><i class="bi bi-lock-fill"></i> Mot de Passe</label>
+                            <input type="password" asp-for="mot_de_passe" class="form-control" placeholder="Mot de passe" required>
                         </div>
                         <div class="form-group text-center mt-4">
                             <button type="submit" class="btn btn-primary"><i class="bi bi-key-fill"></i> Se Connecter</button>

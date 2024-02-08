@@ -1,4 +1,6 @@
 ﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model Boutique_en_ligne.Models.Utilisateur
+
 @{
     Layout = "_Layout";
 }
@@ -9,44 +11,44 @@
             <div class="card">
                 <div class="card-header text-center"><h5 class="font-weight-bold">Formulaire d'inscription</h5></div>
                 <div class="card-body">
-                    <form>
+                    <form asp-action="AddClient" method="post">
                         <div class="form-group mb-4">
-                            <label for="nom"><i class="bi bi-person-fill"></i> Nom</label>
-                            <input type="text" class="form-control" id="nom" placeholder="Votre nom" required>
+                            <label asp-for="nom">Nom</label>
+                            <input asp-for="nom" class="form-control" placeholder="Votre nom" required>
                         </div>
                         <div class="form-group mb-4">
-                            <label for="prenom"><i class="bi bi-person-fill"></i> Prénom</label>
-                            <input type="text" class="form-control" id="prenom" placeholder="Votre prénom" required>
+                            <label asp-for="prenom">Prénom</label>
+                            <input asp-for="prenom" class="form-control" placeholder="Votre prénom" required>
                         </div>
                         <div class="form-group mb-4">
-                            <label for="email"><i class="bi bi-envelope-fill"></i> Adresse Courriel</label>
-                            <input type="email" class="form-control" id="email" placeholder="exemple@mail.com" required>
+                            <label asp-for="adresse_courriel">Adresse Courriel</label>
+                            <input asp-for="adresse_courriel" class="form-control" placeholder="exemple@mail.com" required>
                         </div>
                         <div class="form-group mb-4">
-                            <label for="dateNaissance"><i class="bi bi-calendar-fill"></i> Date de Naissance</label>
-                            <input type="date" class="form-control" id="dateNaissance" required>
+                            <label asp-for="date_naissance">Date de Naissance</label>
+                            <input asp-for="date_naissance" class="form-control" required>
                         </div>
                         <div class="form-group mb-4">
-                            <label for="ville"><i class="bi bi-geo-alt-fill"></i> Ville</label>
-                            <input type="text" class="form-control" id="ville" placeholder="Votre ville" required>
+                            <label asp-for="ville">Ville</label>
+                            <input asp-for="ville" class="form-control" placeholder="Votre ville" required>
                         </div>
                         <div class="form-group mb-4">
-                            <label for="motDePasse"><i class="bi bi-lock-fill"></i> Mot de Passe</label>
-                            <input type="password" class="form-control" id="motDePasse" placeholder="Mot de passe" required>
+                            <label asp-for="mot_de_passe">Mot de Passe</label>
+                            <input asp-for="mot_de_passe" type="password" class="form-control" placeholder="Mot de passe" required>
                         </div>
                         <div class="form-group mb-4">
-                            <label for="confirmerMotDePasse"><i class="bi bi-lock-fill"></i> Confirmer Mot de Passe</label>
+                            <label for="confirmerMotDePasse">Confirmer Mot de Passe</label>
                             <input type="password" class="form-control" id="confirmerMotDePasse" placeholder="Confirmer mot de passe" required>
                         </div>
                         <div class="form-group mb-4">
-                            <label for="typeProfil"><i class="bi bi-person-fill"></i> Type de Profil</label>
-                            <select class="form-control" id="typeProfil" required>
-                                <option value="client">Client</option>
-                                <option value="vendeur">Vendeur</option>
+                            <label asp-for="profil">Type de Profil</label>
+                            <select asp-for="profil" class="form-control" required>
+                                <option value="Client">Client</option>
+                                <option value="Vendeur">Vendeur</option>
                             </select>
                         </div>
                         <div class="form-group text-center mt-4">
-                            <button type="submit" class="btn btn-primary"><i class="bi bi-person-plus-fill"></i> S'inscrire</button>
+                            <button type="submit" class="btn btn-primary">S'inscrire</button>
                         </div>
                     </form>
                 </div>
