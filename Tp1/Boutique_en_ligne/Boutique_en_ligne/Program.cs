@@ -11,6 +11,12 @@ app.UseMvc(routes =>
     );
 
     routes.MapRoute(
+        name: "Authentification", 
+        template: "Authentification/Authentification", 
+        defaults: new { controller = "Authentification", action = "Authentification" } 
+    );
+
+    routes.MapRoute(
         name: "Default",
         template: "{controller=Home}/{action=Index}");
 });
