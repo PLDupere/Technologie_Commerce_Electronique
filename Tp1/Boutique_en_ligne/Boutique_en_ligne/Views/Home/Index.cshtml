@@ -2,16 +2,26 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+    var httpStatusCode = ViewBag.HttpStatusCode;
+    var apiResponse = ViewBag.ApiResponse;
 }
 
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Title of the document</title>
+    <script src="~/lib/twitter-bootstrap/js/bootstrap.js"></script>
+    <link href="~/lib/twitter-bootstrap/css/bootstrap.css"/>
+    <title>Boutique de jeu en ligne</title>
 </head>
 
 <body>
-    <h1>Hello</h1>
+    <h1>HTTP Status Code: @httpStatusCode</h1>
+
+    @if (httpStatusCode == 200)
+    {
+        <h2>API Response:</h2>
+        <pre>@apiResponse</pre>
+    }
 </body>
 
 </html> 
