@@ -2912,19 +2912,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\pierl\\.nuget\\packages\\": {}
+    "C:\\Users\\noemi\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\pierl\\Documents\\GitPLD\\Technologie_Commerce_Electronique\\Tp1\\Boutique_en_ligne\\Boutique_en_ligne\\Boutique_en_ligne.csproj",
+      "projectUniqueName": "C:\\Users\\noemi\\Desktop\\Commerce électronique\\Technologie_Commerce_Electronique\\Tp1\\Boutique_en_ligne\\Boutique_en_ligne\\Boutique_en_ligne.csproj",
       "projectName": "Boutique_en_ligne",
-      "projectPath": "C:\\Users\\pierl\\Documents\\GitPLD\\Technologie_Commerce_Electronique\\Tp1\\Boutique_en_ligne\\Boutique_en_ligne\\Boutique_en_ligne.csproj",
-      "packagesPath": "C:\\Users\\pierl\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\pierl\\Documents\\GitPLD\\Technologie_Commerce_Electronique\\Tp1\\Boutique_en_ligne\\Boutique_en_ligne\\obj\\",
+      "projectPath": "C:\\Users\\noemi\\Desktop\\Commerce électronique\\Technologie_Commerce_Electronique\\Tp1\\Boutique_en_ligne\\Boutique_en_ligne\\Boutique_en_ligne.csproj",
+      "packagesPath": "C:\\Users\\noemi\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\noemi\\Desktop\\Commerce électronique\\Technologie_Commerce_Electronique\\Tp1\\Boutique_en_ligne\\Boutique_en_ligne\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\pierl\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\noemi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -2994,7 +2999,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
       }
     }
   }

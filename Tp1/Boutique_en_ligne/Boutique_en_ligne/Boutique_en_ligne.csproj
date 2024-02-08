@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <Folder Include="Views\Inscription\" />
-    <Folder Include="Views\Authentification\" />
     <Folder Include="Views\Client\" />
     <Folder Include="Views\Vendeur\" />
     <Folder Include="wwwroot\" />
