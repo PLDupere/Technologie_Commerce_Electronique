@@ -7,8 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Authentification\" />
-    <Folder Include="Views\Inscription\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
