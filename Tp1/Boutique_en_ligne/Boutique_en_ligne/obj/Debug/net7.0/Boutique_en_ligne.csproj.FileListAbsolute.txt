@@ -148,3 +148,9 @@ C:\Users\noemi\Desktop\Commerce électronique\Technologie_Commerce_Electronique\
 C:\Users\noemi\Desktop\Commerce électronique\Technologie_Commerce_Electronique\Tp1\Boutique_en_ligne\Boutique_en_ligne\obj\Debug\net7.0\Boutique_en_ligne.pdb
 C:\Users\noemi\Desktop\Commerce électronique\Technologie_Commerce_Electronique\Tp1\Boutique_en_ligne\Boutique_en_ligne\obj\Debug\net7.0\Boutique_en_ligne.genruntimeconfig.cache
 C:\Users\noemi\Desktop\Commerce électronique\Technologie_Commerce_Electronique\Tp1\Boutique_en_ligne\Boutique_en_ligne\obj\Debug\net7.0\ref\Boutique_en_ligne.dll
+C:\Users\noemi\Desktop\Commerce électronique\Technologie_Commerce_Electronique\Tp1\Boutique_en_ligne\Boutique_en_ligne\bin\Debug\net7.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\Users\noemi\Desktop\Commerce électronique\Technologie_Commerce_Electronique\Tp1\Boutique_en_ligne\Boutique_en_ligne\bin\Debug\net7.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\Users\noemi\Desktop\Commerce électronique\Technologie_Commerce_Electronique\Tp1\Boutique_en_ligne\Boutique_en_ligne\bin\Debug\net7.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\noemi\Desktop\Commerce électronique\Technologie_Commerce_Electronique\Tp1\Boutique_en_ligne\Boutique_en_ligne\bin\Debug\net7.0\Microsoft.Extensions.Identity.Core.dll
+C:\Users\noemi\Desktop\Commerce électronique\Technologie_Commerce_Electronique\Tp1\Boutique_en_ligne\Boutique_en_ligne\bin\Debug\net7.0\Microsoft.Extensions.Identity.Stores.dll
+C:\Users\noemi\Desktop\Commerce électronique\Technologie_Commerce_Electronique\Tp1\Boutique_en_ligne\Boutique_en_ligne\bin\Debug\net7.0\Microsoft.Extensions.Options.dll

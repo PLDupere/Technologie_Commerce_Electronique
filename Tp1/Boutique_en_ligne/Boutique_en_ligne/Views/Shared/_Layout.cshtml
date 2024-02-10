@@ -3,6 +3,10 @@
 *@
 @{
 }
+@using Boutique_en_ligne.Models
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -23,12 +27,42 @@
             </button>
             <div class="collapse navbar-collapse justify-content-end col-10" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <button class="btn btn-outline-light mx-2" onclick="location.href='/Authentification/Authentification'"><i class="bi bi-key"></i>  Connexion</button>
-                    </li>
-                    <li class="nav-item">
-                        <button class="btn btn-outline-light mx-2" onclick="location.href='/Inscription/Inscription'"> <i class="bi bi-person-plus"></i> Inscription</button>
-                    </li>
+                    @if (true)  // Conditon pour quand l'utilisateur n'est pas connecté
+                    {
+                        <li class="nav-item">
+                            <button class="btn btn-outline-light mx-2" onclick="location.href='/Authentification/Authentification'"><i class="bi bi-key"></i> Connexion</button>
+                        </li>
+                        <li class="nav-item">
+                            <button class="btn btn-outline-light mx-2" onclick="location.href='/Inscription/Inscription'"> <i class="bi bi-person-plus"></i> Inscription</button>
+                        </li>
+                    }
+                    else if (false)  // Conditon pour quand un Client est connecté
+                    {
+                        <li class="nav-item">
+                            <button class="btn btn-outline-light mx-2" onclick="location.href='/Panier/Index'"><i class="bi bi-cart"></i> Panier</button>
+                        </li>
+                        <li class="nav-item">
+                            <button class="btn btn-outline-light mx-2" onclick="location.href='/Facture/Index'"><i class="bi bi-receipt"></i> Facture</button>
+                        </li>
+                        <li class="nav-item">
+                            <button class="btn btn-outline-light mx-2" onclick="location.href='/Profil/Index'"><i class="bi bi-person"></i> Profil</button>
+                        </li>
+                        <li class="nav-item">
+                            <button class="btn btn-outline-light mx-2" onclick="location.href='/Statistiques/Index'"><i class="bi bi-graph-up"></i> Statistiques</button>
+                        </li>
+                    }
+                    else if (false)  // Conditon pour quand un Vendeur est connecté
+                    {
+                        <li class="nav-item">
+                            <button class="btn btn-outline-light mx-2" onclick="location.href='/Profil/Index'"><i class="bi bi-person"></i> Profil</button>
+                        </li>
+                        <li class="nav-item">
+                            <button class="btn btn-outline-light mx-2" onclick="location.href='/ArticlesDisponibles/Index'"><i class="bi bi-archive"></i> Articles Disponibles</button>
+                        </li>
+                        <li class="nav-item">
+                            <button class="btn btn-outline-light mx-2" onclick="location.href='/Statistiques/Index'"><i class="bi bi-graph-up"></i> Statistiques</button>
+                        </li>
+                    }
                 </ul>
             </div>
         </div>
@@ -39,5 +73,6 @@
     </div>
 </body>
 </html>
+
 
                         
