@@ -3,6 +3,8 @@
 
 @{
     Layout = "_Layout";
+    
+
 }
 
 <div class="container mt-4">
@@ -11,7 +13,7 @@
             <div class="card">
                 <div class="card-header text-center"><h5 class="font-weight-bold">Formulaire d'inscription</h5></div>
                 <div class="card-body">
-                    <form asp-action="AddClient" method="post">
+                    <form method="POST" asp-controller="Client" asp-action="AddClient" id="inscriptionForm">
                         <div class="form-group mb-4">
                             <label asp-for="nom">Nom</label>
                             <input asp-for="nom" class="form-control" placeholder="Votre nom" required>
@@ -38,7 +40,7 @@
                         </div>
                         <div class="form-group mb-4">
                             <label for="confirmerMotDePasse">Confirmer Mot de Passe</label>
-                            <input type="password" class="form-control" id="confirmerMotDePasse" placeholder="Confirmer mot de passe" required>
+                            <input type="password" class="form-control" id="confirmerMotDePasse" name="confirmerMotDePasse" placeholder="Confirmer mot de passe" required>
                         </div>
                         <div class="form-group mb-4">
                             <label asp-for="profil">Type de Profil</label>
@@ -47,6 +49,10 @@
                                 <option value="Vendeur">Vendeur</option>
                             </select>
                         </div>
+                        @if (ViewBag.ErrorMsg != null)
+                        {
+                            <div class="text-danger">@ViewBag.ErrorMsg</div>
+                        }
                         <div class="form-group text-center mt-4">
                             <button type="submit" class="btn btn-primary">S'inscrire</button>
                         </div>
@@ -56,6 +62,7 @@
         </div>
     </div>
 </div>
+
 
 
 

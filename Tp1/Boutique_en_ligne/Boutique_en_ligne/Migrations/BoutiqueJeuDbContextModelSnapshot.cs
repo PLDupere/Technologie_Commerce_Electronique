@@ -138,8 +138,8 @@ namespace Boutique_en_ligne.Migrations
                     b.Property<string>("prenom")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("profil")
-                        .HasColumnType("int");
+                    b.Property<string>("profil")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ville")
                         .HasColumnType("nvarchar(max)");

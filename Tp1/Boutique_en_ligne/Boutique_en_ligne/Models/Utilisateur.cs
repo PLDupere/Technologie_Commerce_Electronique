@@ -1,13 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore.Query;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Boutique_en_ligne.Models
 {
-    public enum Profil
-    {
-        Client,
-        Vendeur,
-    }
+  
     public class Utilisateur
     {
         public Utilisateur() {
@@ -21,7 +18,7 @@ namespace Boutique_en_ligne.Models
         public DateTime? date_naissance { get; set; }
         public string? ville { get; set; }
         public string? mot_de_passe { get; set; }
-        public Profil? profil { get; set; }
+        public string? profil { get; set; }
 
         //many to many with JeuVideo
         public ICollection<JeuVideo> JeuxVideos { get; set; }

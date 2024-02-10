@@ -16,10 +16,6 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\noemi\Desktop\Commerce électronique\Technologie_Commerce_Electronique\Tp1\Boutique_en_ligne\Boutique_en_ligne
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/noemi/Desktop/Commerce électronique/Technologie_Commerce_Electronique/Tp1/Boutique_en_ligne/Boutique_en_ligne/Views/Authentification/Authentification.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aGVudGlmaWNhdGlvblxBdXRoZW50aWZpY2F0aW9uLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/noemi/Desktop/Commerce électronique/Technologie_Commerce_Electronique/Tp1/Boutique_en_ligne/Boutique_en_ligne/Views/Client/Factures.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50XEZhY3R1cmVzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -40,12 +36,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50XFN0YXRpc3RpcXVlcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/noemi/Desktop/Commerce électronique/Technologie_Commerce_Electronique/Tp1/Boutique_en_ligne/Boutique_en_ligne/Views/Home/Authentification.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxBdXRoZW50aWZpY2F0aW9uLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/noemi/Desktop/Commerce électronique/Technologie_Commerce_Electronique/Tp1/Boutique_en_ligne/Boutique_en_ligne/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/noemi/Desktop/Commerce électronique/Technologie_Commerce_Electronique/Tp1/Boutique_en_ligne/Boutique_en_ligne/Views/Inscription/Inscription.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5zY3JpcHRpb25cSW5zY3JpcHRpb24uY3NodG1s
+[C:/Users/noemi/Desktop/Commerce électronique/Technologie_Commerce_Electronique/Tp1/Boutique_en_ligne/Boutique_en_ligne/Views/Home/Inscription.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbnNjcmlwdGlvbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/noemi/Desktop/Commerce électronique/Technologie_Commerce_Electronique/Tp1/Boutique_en_ligne/Boutique_en_ligne/Views/Shared/_Layout.cshtml]

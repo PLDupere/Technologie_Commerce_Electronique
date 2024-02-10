@@ -9,5 +9,15 @@ namespace Boutique_en_ligne.Controllers
             return View();
         }
 
+        public IActionResult Inscription()
+        {
+            return View();
+        }
+
+        public IActionResult Authentification()
+        {
+            return View();
+        }
+
     }
 }
