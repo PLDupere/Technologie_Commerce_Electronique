@@ -7,7 +7,7 @@ namespace Boutique_en_ligne.Controllers
 {
     public class ClientController : Controller
     {
-
+        // Accès aux vues des pages d'inscription et d'accueil
         public IActionResult Inscription()
         {
             return View();
@@ -18,9 +18,11 @@ namespace Boutique_en_ligne.Controllers
             return View();
         }
 
+        // Db context et hashage du mot de passe
         private readonly BoutiqueJeuDbContext _dbContext;
         private readonly IPasswordHasher<Utilisateur> _passwordHasher;
 
+        // Constructeur
         public ClientController(BoutiqueJeuDbContext dbContext)
         {
             this._dbContext = dbContext;
@@ -28,7 +30,7 @@ namespace Boutique_en_ligne.Controllers
 
         }
 
-
+        // Ajout d'un client et redirection vers AddVendeur si le profil est "Vendeur"
         [HttpPost]
         public IActionResult AddClient(Models.Client client, string confirmerMotDePasse)
         {
@@ -54,9 +56,26 @@ namespace Boutique_en_ligne.Controllers
 
                 // Revenir à la page d'accueil après l'inscription
                 return RedirectToAction("Index", "Home");
-                //return View("ConvertOrAddUser", convertOrAddUser);
+             
             }
 
+        }
+
+        public IActionResult Profil()
+        {
+            string userId = HttpContext.Session.GetString("UserId");
+
+            if (!string.IsNullOrEmpty(userId))
+            {
+                var utilisateur = _dbContext.Clients.FirstOrDefault(u => u.Id == int.Parse(userId));
+
+                if (utilisateur != null && utilisateur.profil == "Client")
+                {
+                    var client = utilisateur;
+                    return View(client);
+                }
+            }
+            return RedirectToAction("Authentification", "Home");
         }
 
         [HttpGet]
@@ -67,14 +86,33 @@ namespace Boutique_en_ligne.Controllers
             return View();
         }
 
-        [HttpPut]
-        public IActionResult UpdateClient(int clientId, Models.Client clientToUpdate)
+        [HttpPost]
+        public IActionResult UpdateClient(string confirmerMotDePasse, Models.Client clientToUpdate)
         {
-            Models.Client client = _dbContext.Clients.Where(c => c.Id == clientId).First();
-            client = clientToUpdate;
-            _dbContext.SaveChanges();
+            string userId = HttpContext.Session.GetString("UserId");
+            Models.Client client = _dbContext.Clients.FirstOrDefault(u => u.Id == int.Parse(userId));
 
-            return View(client);
+            if (client != null)
+            {
+                // Vérifier si les deux mots de passe correspondent
+                if (clientToUpdate.mot_de_passe != confirmerMotDePasse)
+                {
+                    ViewBag.ErrorMsg = "Les mots de passe ne correspondent pas";
+                    return View("~/Views/Client/Profil.cshtml", clientToUpdate); 
+                }
+
+                clientToUpdate.mot_de_passe = _passwordHasher.HashPassword(clientToUpdate, clientToUpdate.mot_de_passe);
+
+                client.nom = clientToUpdate.nom;
+                client.prenom = clientToUpdate.prenom;
+                client.date_naissance = clientToUpdate.date_naissance;
+                client.ville = clientToUpdate.ville;
+                client.mot_de_passe = clientToUpdate.mot_de_passe;
+
+
+                _dbContext.SaveChanges();
+            }
+            return RedirectToAction("Index", "Client");
         }
 
         [HttpDelete]

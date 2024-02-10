@@ -35,6 +35,12 @@ app.UseMvc(routes =>
     routes.MapRoute(
         name: "Default",
         template: "{controller=Home}/{action=Index}");
+
+    routes.MapRoute(
+        name: "ProfilClient",
+        template: "Client/Profil",
+        defaults: new { controller = "Client", action = "Profil" }
+    );
 });
 
 
