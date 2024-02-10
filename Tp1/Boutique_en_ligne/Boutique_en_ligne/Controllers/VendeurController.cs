@@ -17,6 +17,11 @@ namespace Boutique_en_ligne.Controllers
 
         }
 
+        public IActionResult Index()
+        {
+            return View();
+        }
+
         [HttpGet]
         [HttpPost]
         public IActionResult AddVendeur(Models.Vendeur vendeur)

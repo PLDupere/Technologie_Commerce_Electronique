@@ -8,8 +8,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddMvc(option => option.EnableEndpointRouting = false);
 builder.Services.AddDbContext<BoutiqueJeuDbContext>();
 builder.Services.AddScoped<IPasswordHasher<Utilisateur>, PasswordHasher<Utilisateur>>();
+builder.Services.AddSession();
+builder.Services.AddControllersWithViews();
+// HttpContextAccessor
+builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
+app.UseSession();
 
 
 app.UseMvc(routes =>

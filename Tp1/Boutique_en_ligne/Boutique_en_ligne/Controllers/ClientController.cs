@@ -13,6 +13,11 @@ namespace Boutique_en_ligne.Controllers
             return View();
         }
 
+        public IActionResult Index()
+        {
+            return View();
+        }
+
         private readonly BoutiqueJeuDbContext _dbContext;
         private readonly IPasswordHasher<Utilisateur> _passwordHasher;
 
@@ -34,9 +39,6 @@ namespace Boutique_en_ligne.Controllers
                 return View("~/Views/Home/Inscription.cshtml", client);
             }
 
-            // Hashage du mot de passe
-            client.mot_de_passe = _passwordHasher.HashPassword(client, client.mot_de_passe);
-
             if (client.profil == "Vendeur")
             {
                 return RedirectToAction("AddVendeur", "Vendeur", client);
@@ -44,6 +46,9 @@ namespace Boutique_en_ligne.Controllers
         
             else
             {
+                // Hashage du mot de passe
+                client.mot_de_passe = _passwordHasher.HashPassword(client, client.mot_de_passe);
+
                 this._dbContext.Clients.Add(client);
                 this._dbContext.SaveChanges();
 

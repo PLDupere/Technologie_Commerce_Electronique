@@ -1,11 +1,12 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
-@using Boutique_en_ligne.Models
-@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+﻿@using Boutique_en_ligne.Models
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
 
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    var session = HttpContextAccessor.HttpContext.Session;
+    var userProfil = session.GetString("UserProfil");
+}
 
 
 <!DOCTYPE html>
@@ -27,7 +28,7 @@
             </button>
             <div class="collapse navbar-collapse justify-content-end col-10" id="navbarNav">
                 <ul class="navbar-nav">
-                    @if (true)  // Conditon pour quand l'utilisateur n'est pas connecté
+                    @if (string.IsNullOrEmpty(userProfil)) // L'utilisateur n'est pas connecté 
                     {
                         <li class="nav-item">
                             <button class="btn btn-outline-light mx-2" onclick="location.href='/Home/Authentification'"><i class="bi bi-key"></i> Connexion</button>
@@ -36,7 +37,7 @@
                             <button class="btn btn-outline-light mx-2" onclick="location.href='/Home/Inscription'"> <i class="bi bi-person-plus"></i> Inscription</button>
                         </li>
                     }
-                    else if (false)  // Conditon pour quand un Client est connecté
+                    else if (userProfil == "Client")  // Conditon pour quand un Client est connecté
                     {
                         <li class="nav-item">
                             <button class="btn btn-outline-light mx-2" onclick="location.href='/Panier/Index'"><i class="bi bi-cart"></i> Panier</button>
@@ -51,7 +52,7 @@
                             <button class="btn btn-outline-light mx-2" onclick="location.href='/Statistiques/Index'"><i class="bi bi-graph-up"></i> Statistiques</button>
                         </li>
                     }
-                    else if (false)  // Conditon pour quand un Vendeur est connecté
+                    else if (userProfil == "Vendeur")  // Conditon pour quand un Vendeur est connecté
                     {
                         <li class="nav-item">
                             <button class="btn btn-outline-light mx-2" onclick="location.href='/Profil/Index'"><i class="bi bi-person"></i> Profil</button>
