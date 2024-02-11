@@ -1,0 +1,43 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "_Layout";
+}
+
+@model Boutique_en_ligne.Models.CarteCredit
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header text-center"><h5 class="font-weight-bold">Carte de crédit</h5></div>
+                <div class="card-body">
+                    <form method="post" asp-controller="Client" asp-action="EnregistrerCarteCredit" id="updateForm">
+                        <div class="form-group mb-4">
+                            <label for="montant">Montant à ajouter</label>
+                            <input type="number" id="montant" name="montant" class="form-control">
+                        </div>
+                        <div class="form-group mb-4">
+                            <label asp-for="detenteur">Détenteur de la carte</label>
+                            <input asp-for="detenteur" class="form-control" placeholder="Nom du détenteur">
+                        </div>
+                        <div class="form-group mb-4">
+                            <label asp-for="numero">Numéro de carte</label>
+                            <input asp-for="numero" class="form-control" placeholder="Numéro de carte" maxlength="16" pattern="\d{16}">
+                        </div>
+                        <div class="form-group mb-4">
+                            <label asp-for="date">Date d'expiration</label>
+                            <input asp-for="date" type="date" class="form-control" placeholder="MM/AA">
+                        </div>
+                        <div class="form-group mb-4">
+                            <label asp-for="numero_secret">Numéro secret</label>
+                            <input asp-for="numero_secret" type="password" class="form-control" placeholder="Numéro secret" maxlength="3" pattern="\d{3}">
+                        </div>
+                        <div class="form-group text-center mt-4">
+                            <button type="submit" class="btn btn-primary">Mettre à jour le solde</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -41,11 +41,6 @@ namespace Boutique_en_ligne.Controllers
                 // Vérifiez si le mot de passe fourni correspond au mot de passe haché stocké dans la base de données
                 var passwordHasher = new PasswordHasher<Utilisateur>();
                 var result = passwordHasher.VerifyHashedPassword(utilisateurConnecte, utilisateurConnecte.mot_de_passe, mdp);
-                // montrer mdp haché
-                Console.WriteLine(utilisateurConnecte.mot_de_passe);
-                Console.WriteLine(result);
-
-
 
                 if (result == PasswordVerificationResult.Success)
                 {
@@ -56,15 +51,10 @@ namespace Boutique_en_ligne.Controllers
                     // Redirigez l'utilisateur vers une page appropriée en fonction de son profil
                     if (utilisateurConnecte.profil == "Client")
                     {
-                        //faire un log dans la console
-                        Console.WriteLine("Client connecté");
-
                         return RedirectToAction("Index", "Client");
                     }
                     else if (utilisateurConnecte.profil == "Vendeur")
                     {
-
-                        Console.WriteLine("Vendeur connecté");
                         return RedirectToAction("Index", "Vendeur");
                     }
                 }

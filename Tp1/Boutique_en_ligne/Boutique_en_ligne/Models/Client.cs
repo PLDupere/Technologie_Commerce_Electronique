@@ -1,11 +1,13 @@
-﻿namespace Boutique_en_ligne.Models
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace Boutique_en_ligne.Models
 {
     public class Client : Utilisateur
     {
         public Client() {
             Factures = new List<Facture>();
+            solde = 0;
         }
-
 
         public float? solde { get; set; }
 

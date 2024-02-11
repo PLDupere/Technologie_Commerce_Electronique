@@ -13,6 +13,11 @@ namespace Boutique_en_ligne.Controllers
             return View();
         }
 
+        public IActionResult CarteCredit()
+        {
+            return View();
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -112,6 +117,29 @@ namespace Boutique_en_ligne.Controllers
 
                 _dbContext.SaveChanges();
             }
+            return RedirectToAction("Index", "Client");
+        }
+
+        [HttpPost]
+        public IActionResult EnregistrerCarteCredit(Models.CarteCredit carteCredit, float montant)
+        {
+            if (carteCredit != null)
+            {
+                _dbContext.CarteCredits.Add(carteCredit);
+                _dbContext.SaveChanges();
+            }
+
+            string userId = HttpContext.Session.GetString("UserId");
+            if (!string.IsNullOrEmpty(userId))
+            {
+                Models.Client client = _dbContext.Clients.FirstOrDefault(u => u.Id == int.Parse(userId));;
+                if (client != null)
+                {
+                    client.solde += montant;
+                    _dbContext.SaveChanges();
+                }
+            }
+
             return RedirectToAction("Index", "Client");
         }
 
