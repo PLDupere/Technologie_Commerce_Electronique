@@ -22,6 +22,23 @@ namespace Boutique_en_ligne.Controllers
             return View();
         }
 
+        public IActionResult Profil()
+        {
+            string userId = HttpContext.Session.GetString("UserId");
+
+            if (!string.IsNullOrEmpty(userId))
+            {
+                var utilisateur = _dbContext.Vendeurs.FirstOrDefault(u => u.Id == int.Parse(userId));
+
+                if (utilisateur != null && utilisateur.profil == "Vendeur")
+                {
+                    var vendeur = utilisateur;
+                    return View(vendeur);
+                }
+            }
+            return RedirectToAction("Authentification", "Home");
+        }
+
         [HttpGet]
         [HttpPost]
         public IActionResult AddVendeur(Models.Vendeur vendeur)
@@ -48,14 +65,33 @@ namespace Boutique_en_ligne.Controllers
             return View(vendeur);
         }
 
-        [HttpPut]
-        public IActionResult UpdateVendeur(int vendeurId, Models.Vendeur vendeurToUpdate)
+        [HttpPost]
+        public IActionResult UpdateVendeur(string confirmerMotDePasse, Models.Vendeur vendeurToUpdate)
         {
-            Models.Vendeur vendeur = _dbContext.Vendeurs.Where(v => v.Id == vendeurId).First();
-            vendeur = vendeurToUpdate;
-            _dbContext.SaveChanges();
+            string userId = HttpContext.Session.GetString("UserId");
+            Models.Vendeur vendeur = _dbContext.Vendeurs.FirstOrDefault(u => u.Id == int.Parse(userId));
 
-            return View(vendeur);
+            if (vendeur != null)
+            {
+                // Vérifier si les deux mots de passe correspondent
+                if (vendeurToUpdate.mot_de_passe != confirmerMotDePasse)
+                {
+                    ViewBag.ErrorMsg = "Les mots de passe ne correspondent pas";
+                    return View("~/Views/Vendeur/Profil.cshtml", vendeurToUpdate);
+                }
+
+                vendeurToUpdate.mot_de_passe = _passwordHasher.HashPassword(vendeurToUpdate, vendeurToUpdate.mot_de_passe);
+
+                vendeur.nom = vendeurToUpdate.nom;
+                vendeur.prenom = vendeurToUpdate.prenom;
+                vendeur.date_naissance = vendeurToUpdate.date_naissance;
+                vendeur.ville = vendeurToUpdate.ville;
+                vendeur.mot_de_passe = vendeurToUpdate.mot_de_passe;
+
+
+                _dbContext.SaveChanges();
+            }
+            return RedirectToAction("Index", "Vendeur");
         }
 
         [HttpDelete]

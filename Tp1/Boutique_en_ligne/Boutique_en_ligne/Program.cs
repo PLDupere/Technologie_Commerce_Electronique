@@ -47,6 +47,12 @@ app.UseMvc(routes =>
         template: "Client/CarteCredit",
         defaults: new { controller = "Client", action = "CarteCredit" }
         );
+
+    routes.MapRoute(
+      name: "ProfilVendeur",
+      template: "Vendeur/Profil",
+      defaults: new { controller = "Vendeur", action = "Profil" }
+      );
 });
 
 

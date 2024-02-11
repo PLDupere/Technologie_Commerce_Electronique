@@ -3,6 +3,7 @@ using static System.Net.Mime.MediaTypeNames;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using System.Diagnostics.Metrics;
 using System;
+using Boutique_en_ligne.Models;
 
 namespace Boutique_en_ligne
 {

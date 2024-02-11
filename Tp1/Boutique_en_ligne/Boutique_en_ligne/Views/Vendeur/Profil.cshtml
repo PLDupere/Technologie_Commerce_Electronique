@@ -1,0 +1,57 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "_Layout";
+}
+
+@model Boutique_en_ligne.Models.Vendeur
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header text-center"><h5 class="font-weight-bold">Profil</h5></div>
+                <div class="card-body">
+                    <form method="POST" asp-controller="Vendeur" asp-action="UpdateVendeur" id="inscriptionForm">
+                        <div class="form-group mb-4">
+                            <label asp-for="nom">Nom</label>
+                            <input asp-for="nom" class="form-control" placeholder="Votre nom" value="@Model.nom" required>
+                        </div>
+                        <div class="form-group mb-4">
+                            <label asp-for="prenom">Prénom</label>
+                            <input asp-for="prenom" class="form-control" placeholder="Votre prénom" value="@Model.prenom" required>
+                        </div>
+                        <div class="form-group mb-4">
+                            <label asp-for="adresse_courriel">Adresse Courriel</label>
+                            <input asp-for="adresse_courriel" class="form-control" placeholder="exemple@mail.com" value="@Model.adresse_courriel" readonly>
+                        </div>
+                        <div class="form-group mb-4">
+                            <label asp-for="date_naissance">Date de Naissance</label>
+                            <input asp-for="date_naissance" type="date" class="form-control" required>
+                        </div>
+                        <div class="form-group mb-4">
+                            <label asp-for="ville">Ville</label>
+                            <input asp-for="ville" class="form-control" placeholder="Votre ville" value="@Model.ville" required>
+                        </div>
+                        <div class="form-group mb-4">
+                            <label asp-for="mot_de_passe">Mot de Passe</label>
+                            <input asp-for="mot_de_passe" type="password" class="form-control" placeholder="Mot de passe" required>
+                        </div>
+                        <div class="form-group mb-4">
+                            <label for="confirmerMotDePasse">Confirmer Mot de Passe</label>
+                            <input type="password" class="form-control" id="confirmerMotDePasse" name="confirmerMotDePasse" placeholder="Confirmer mot de passe" required>
+                        </div>
+                        @if (ViewBag.ErrorMsg != null)
+                        {
+                            <div class="alert alert-danger" role="alert">
+                                @ViewBag.ErrorMsg
+                            </div>
+                        }
+                        <div class="form-group text-center mt-4">
+                            <button type="submit" class="btn btn-primary">Modifier mon profil</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

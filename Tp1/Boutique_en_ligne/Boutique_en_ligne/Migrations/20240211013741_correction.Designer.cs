@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Boutique_en_ligne.Migrations
 {
     [DbContext(typeof(BoutiqueJeuDbContext))]
-    [Migration("20240208145705_bd")]
-    partial class bd
+    [Migration("20240211013741_correction")]
+    partial class correction
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,6 +33,9 @@ namespace Boutique_en_ligne.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"));
 
+                    b.Property<int>("ClientId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("date")
                         .HasColumnType("datetime2");
 
@@ -46,6 +49,8 @@ namespace Boutique_en_ligne.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ClientId");
 
                     b.ToTable("CarteCredits");
                 });
@@ -141,8 +146,8 @@ namespace Boutique_en_ligne.Migrations
                     b.Property<string>("prenom")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("profil")
-                        .HasColumnType("int");
+                    b.Property<string>("profil")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ville")
                         .HasColumnType("nvarchar(max)");
@@ -175,16 +180,8 @@ namespace Boutique_en_ligne.Migrations
                 {
                     b.HasBaseType("Boutique_en_ligne.Models.Utilisateur");
 
-                    b.Property<int?>("CarteId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("carteCreditId")
-                        .HasColumnType("int");
-
                     b.Property<float?>("solde")
                         .HasColumnType("real");
-
-                    b.HasIndex("carteCreditId");
 
                     b.HasDiscriminator().HasValue("Client");
                 });
@@ -194,6 +191,17 @@ namespace Boutique_en_ligne.Migrations
                     b.HasBaseType("Boutique_en_ligne.Models.Utilisateur");
 
                     b.HasDiscriminator().HasValue("Vendeur");
+                });
+
+            modelBuilder.Entity("Boutique_en_ligne.Models.CarteCredit", b =>
+                {
+                    b.HasOne("Boutique_en_ligne.Models.Client", "Client")
+                        .WithMany("CartesCredit")
+                        .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Client");
                 });
 
             modelBuilder.Entity("Boutique_en_ligne.Models.Facture", b =>
@@ -222,15 +230,8 @@ namespace Boutique_en_ligne.Migrations
 
             modelBuilder.Entity("Boutique_en_ligne.Models.Client", b =>
                 {
-                    b.HasOne("Boutique_en_ligne.Models.CarteCredit", "carteCredit")
-                        .WithMany()
-                        .HasForeignKey("carteCreditId");
+                    b.Navigation("CartesCredit");
 
-                    b.Navigation("carteCredit");
-                });
-
-            modelBuilder.Entity("Boutique_en_ligne.Models.Client", b =>
-                {
                     b.Navigation("Factures");
                 });
 #pragma warning restore 612, 618

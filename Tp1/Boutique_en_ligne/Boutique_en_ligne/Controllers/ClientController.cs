@@ -123,13 +123,31 @@ namespace Boutique_en_ligne.Controllers
         [HttpPost]
         public IActionResult EnregistrerCarteCredit(Models.CarteCredit carteCredit, float montant)
         {
-            if (carteCredit != null)
-            {
-                _dbContext.CarteCredits.Add(carteCredit);
-                _dbContext.SaveChanges();
-            }
-
             string userId = HttpContext.Session.GetString("UserId");
+
+            if (carteCredit != null)
+                if (carteCredit != null)
+                {
+                    if (!string.IsNullOrEmpty(userId))
+                    {
+                        carteCredit.ClientId = int.Parse(userId); 
+                    }
+
+                    // Vérifier si la carte de crédit existe déjà
+                    var existingCarteCredit = _dbContext.CarteCredits.FirstOrDefault(cc =>
+                        cc.numero == carteCredit.numero &&
+                        cc.date == carteCredit.date &&
+                        cc.detenteur == carteCredit.detenteur &&
+                        cc.numero_secret == carteCredit.numero_secret);
+
+                    if (existingCarteCredit == null)
+                    {
+                        _dbContext.CarteCredits.Add(carteCredit);
+                        _dbContext.SaveChanges();
+                    }
+                }
+
+
             if (!string.IsNullOrEmpty(userId))
             {
                 Models.Client client = _dbContext.Clients.FirstOrDefault(u => u.Id == int.Parse(userId));;

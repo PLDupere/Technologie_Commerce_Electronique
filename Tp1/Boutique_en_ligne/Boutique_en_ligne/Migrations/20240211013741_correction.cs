@@ -5,7 +5,7 @@
 namespace Boutique_en_ligne.Migrations
 {
     /// <inheritdoc />
-    public partial class attributProfil : Migration
+    public partial class correction : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
