@@ -7,7 +7,7 @@ namespace Boutique_en_ligne.Controllers
 {
     public class ClientController : Controller
     {
-        // Accès aux vues des pages d'inscription et d'accueil
+        // Accès aux vues des pages d'inscription, d'accueil et de la carte de crédit pour alimenter le solde
         public IActionResult Inscription()
         {
             return View();
@@ -46,6 +46,7 @@ namespace Boutique_en_ligne.Controllers
                 return View("~/Views/Home/Inscription.cshtml", client);
             }
 
+            // Redirection vers AddVendeur si le profil est "Vendeur"
             if (client.profil == "Vendeur")
             {
                 return RedirectToAction("AddVendeur", "Vendeur", client);
@@ -66,6 +67,7 @@ namespace Boutique_en_ligne.Controllers
 
         }
 
+        // Récupération des informations du client connecté grâce à la session (afin de les afficher dans la vue du profil)
         public IActionResult Profil()
         {
             string userId = HttpContext.Session.GetString("UserId");
@@ -91,6 +93,7 @@ namespace Boutique_en_ligne.Controllers
             return View();
         }
 
+        // Mise à jour des informations du client
         [HttpPost]
         public IActionResult UpdateClient(string confirmerMotDePasse, Models.Client clientToUpdate)
         {
@@ -120,34 +123,36 @@ namespace Boutique_en_ligne.Controllers
             return RedirectToAction("Index", "Client");
         }
 
+        // Ajout d'une carte de crédit et mise à jour du solde du client
         [HttpPost]
         public IActionResult EnregistrerCarteCredit(Models.CarteCredit carteCredit, float montant)
         {
             string userId = HttpContext.Session.GetString("UserId");
 
+            // Associer la carte de crédit au client connecté
             if (carteCredit != null)
-                if (carteCredit != null)
+            {
+                if (!string.IsNullOrEmpty(userId))
                 {
-                    if (!string.IsNullOrEmpty(userId))
-                    {
-                        carteCredit.ClientId = int.Parse(userId); 
-                    }
-
-                    // Vérifier si la carte de crédit existe déjà
-                    var existingCarteCredit = _dbContext.CarteCredits.FirstOrDefault(cc =>
-                        cc.numero == carteCredit.numero &&
-                        cc.date == carteCredit.date &&
-                        cc.detenteur == carteCredit.detenteur &&
-                        cc.numero_secret == carteCredit.numero_secret);
-
-                    if (existingCarteCredit == null)
-                    {
-                        _dbContext.CarteCredits.Add(carteCredit);
-                        _dbContext.SaveChanges();
-                    }
+                    carteCredit.ClientId = int.Parse(userId); 
                 }
 
+                // Vérifier si la carte de crédit existe déjà
+                var existingCarteCredit = _dbContext.CarteCredits.FirstOrDefault(cc =>
+                    cc.numero == carteCredit.numero &&
+                    cc.date == carteCredit.date &&
+                    cc.detenteur == carteCredit.detenteur &&
+                    cc.numero_secret == carteCredit.numero_secret);
 
+                // Si la carte de crédit n'existe pas, l'ajouter à la base de données
+                if (existingCarteCredit == null)
+                {
+                    _dbContext.CarteCredits.Add(carteCredit);
+                    _dbContext.SaveChanges();
+                }
+            }
+
+            // Mettre à jour le solde du client
             if (!string.IsNullOrEmpty(userId))
             {
                 Models.Client client = _dbContext.Clients.FirstOrDefault(u => u.Id == int.Parse(userId));;

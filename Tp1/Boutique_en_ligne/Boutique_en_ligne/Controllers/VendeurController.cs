@@ -7,9 +7,11 @@ namespace Boutique_en_ligne.Controllers
 {
     public class VendeurController : Controller
     {
+        // DbContext et PasswordHasher
         private readonly BoutiqueJeuDbContext _dbContext;
         private readonly IPasswordHasher<Utilisateur> _passwordHasher;
 
+        // Constructeur
         public VendeurController(BoutiqueJeuDbContext dbContext)
         {
             this._dbContext = dbContext;
@@ -17,11 +19,13 @@ namespace Boutique_en_ligne.Controllers
 
         }
 
+        // Vue pour la page d'accueil
         public IActionResult Index()
         {
             return View();
         }
 
+        // Récupération des informations du vendeur connecté grâce à la session (afin de les afficher dans la vue du profil)
         public IActionResult Profil()
         {
             string userId = HttpContext.Session.GetString("UserId");
@@ -39,11 +43,11 @@ namespace Boutique_en_ligne.Controllers
             return RedirectToAction("Authentification", "Home");
         }
 
+        // Inscription d'un vendeur
         [HttpGet]
         [HttpPost]
         public IActionResult AddVendeur(Models.Vendeur vendeur)
         {
-          
             // Hashage du mot de passe
             vendeur.mot_de_passe = _passwordHasher.HashPassword(vendeur, vendeur.mot_de_passe);
            
@@ -52,9 +56,6 @@ namespace Boutique_en_ligne.Controllers
 
             // Revenir à la page d'accueil après l'inscription
             return RedirectToAction("Index", "Home");
-            //return View("ConvertOrAddUser", convertOrAddUser);
-            
-
         }
 
         [HttpGet]
@@ -65,6 +66,7 @@ namespace Boutique_en_ligne.Controllers
             return View(vendeur);
         }
 
+        // Mise à jour des informations du vendeur 
         [HttpPost]
         public IActionResult UpdateVendeur(string confirmerMotDePasse, Models.Vendeur vendeurToUpdate)
         {
@@ -87,7 +89,6 @@ namespace Boutique_en_ligne.Controllers
                 vendeur.date_naissance = vendeurToUpdate.date_naissance;
                 vendeur.ville = vendeurToUpdate.ville;
                 vendeur.mot_de_passe = vendeurToUpdate.mot_de_passe;
-
 
                 _dbContext.SaveChanges();
             }

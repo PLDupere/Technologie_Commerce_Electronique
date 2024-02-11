@@ -1,13 +1,12 @@
 ﻿@using Boutique_en_ligne.Models
 @using Microsoft.AspNetCore.Http
-@inject IHttpContextAccessor HttpContextAccessor
+@inject IHttpContextAccessor HttpContextAccessor           // Permet d'accéder à la session de l'utilisateur pour savoir si c'est un client ou un vendeur'
 
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
     var session = HttpContextAccessor.HttpContext.Session;
     var userProfil = session.GetString("UserProfil");
 }
-
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -22,7 +21,21 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand col-2" href="/Home/Index">Nom Boutique</a>
+            @{
+                string boutiqueUrl = "/Home/Index";
+                if (!string.IsNullOrEmpty(userProfil))
+                {
+                    if (userProfil == "Client")
+                    {
+                        boutiqueUrl = "/Client/Index";
+                    }
+                    else if (userProfil == "Vendeur")
+                    {
+                        boutiqueUrl = "/Vendeur/Index";
+                    }
+                }
+            }
+            <a class="navbar-brand col-2" href="@boutiqueUrl">Nom Boutique</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>

@@ -10,13 +10,13 @@ namespace Boutique_en_ligne.Controllers
     {
         private readonly BoutiqueJeuDbContext _dbContext;
         
-
         public HomeController(BoutiqueJeuDbContext dbContext)
         {
             this._dbContext = dbContext;
            
         }
 
+        // Vues pour les pages d'accueil, d'inscription et d'authentification
         public IActionResult Index()
         {
             return View();
@@ -32,23 +32,24 @@ namespace Boutique_en_ligne.Controllers
             return View();
         }
 
+        // Connexion d'un utilisateur et enrégistrement de ses informations dans la session
         [HttpPost]
         public IActionResult Connecter(Utilisateur utilisateur, string mdp)
         {
             var utilisateurConnecte = _dbContext.Utilisateurs.FirstOrDefault(u => u.adresse_courriel == utilisateur.adresse_courriel);
             if (utilisateurConnecte != null)
             {
-                // Vérifiez si le mot de passe fourni correspond au mot de passe haché stocké dans la base de données
+                // Vérifier si le mot de passe fourni correspond au mot de passe haché stocké dans la base de données
                 var passwordHasher = new PasswordHasher<Utilisateur>();
                 var result = passwordHasher.VerifyHashedPassword(utilisateurConnecte, utilisateurConnecte.mot_de_passe, mdp);
 
                 if (result == PasswordVerificationResult.Success)
                 {
-                    // Authentification réussie, enregistrez les informations de l'utilisateur dans la session
+                    // Enregistrer l'ID et le profil de l'utilisateur dans la session
                     HttpContext.Session.SetString("UserId", utilisateurConnecte.Id.ToString());
                     HttpContext.Session.SetString("UserProfil", utilisateurConnecte.profil.ToString());
 
-                    // Redirigez l'utilisateur vers une page appropriée en fonction de son profil
+                    // Rediriger l'utilisateur vers la page appropriée en fonction de son profil
                     if (utilisateurConnecte.profil == "Client")
                     {
                         return RedirectToAction("Index", "Client");
@@ -61,7 +62,7 @@ namespace Boutique_en_ligne.Controllers
           
             }
 
-            // Authentification échouée, affichez un message d'erreur
+            // Message d'erreur si l'authentification échoue
             ViewBag.ErrorMessageConnexion = "Adresse e-mail ou mot de passe incorrect.";
             return View("Authentification"); // Afficher à nouveau le formulaire de connexion
         }

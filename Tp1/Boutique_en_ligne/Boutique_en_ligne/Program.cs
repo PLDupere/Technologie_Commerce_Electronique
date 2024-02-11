@@ -1,22 +1,21 @@
-
-
 using Boutique_en_ligne;
 using Boutique_en_ligne.Models;
 using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Services de l'application
 builder.Services.AddMvc(option => option.EnableEndpointRouting = false);
 builder.Services.AddDbContext<BoutiqueJeuDbContext>();
-builder.Services.AddScoped<IPasswordHasher<Utilisateur>, PasswordHasher<Utilisateur>>();
-builder.Services.AddSession();
-builder.Services.AddControllersWithViews();
-// HttpContextAccessor
-builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<IPasswordHasher<Utilisateur>, PasswordHasher<Utilisateur>>();    // Pour hasher les mots de passe
+builder.Services.AddSession();                                                              // Authentification par session
+builder.Services.AddControllersWithViews();                                                 
+builder.Services.AddHttpContextAccessor();                                                  // Pour accéder à la session
 
 var app = builder.Build();
 app.UseSession();
 
-
+// Routes (boutons de la barre de navigation)
 app.UseMvc(routes =>
 {
     routes.MapRoute(
@@ -53,6 +52,20 @@ app.UseMvc(routes =>
       template: "Vendeur/Profil",
       defaults: new { controller = "Vendeur", action = "Profil" }
       );
+
+    routes.MapRoute(
+     name: "AccueilClient",
+     template: "Client/Index",
+     defaults: new { controller = "Client", action = "Index" }
+     );
+
+    routes.MapRoute(
+     name: "AccueilVendeur",
+     template: "Vendeur/Index",
+     defaults: new { controller = "Vendeur", action = "Index" }
+     );
+
+
 });
 
 
