@@ -1,8 +1,17 @@
 ﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
     Layout = "_Layout";
+    var httpStatusCode = ViewBag.HttpStatusCode;
+    var apiResponse = ViewBag.ApiResponse;
 }
 
 <h1>Hello</h1>
 
 
+<h1>HTTP Status Code: @httpStatusCode</h1>
+
+@if (httpStatusCode == 200)
+{
+    <h2>API Response:</h2>
+    <pre>@apiResponse</pre>
+}
