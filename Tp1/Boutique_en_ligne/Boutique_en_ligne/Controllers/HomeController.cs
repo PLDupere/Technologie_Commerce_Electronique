@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
 namespace Boutique_en_ligne.Controllers
@@ -66,5 +67,52 @@ namespace Boutique_en_ligne.Controllers
             ViewBag.ErrorMessageConnexion = "Adresse e-mail ou mot de passe incorrect.";
             return View("Authentification"); // Afficher à nouveau le formulaire de connexion
         }
+
+        // Récupérer les jeux vidéos de la BD suite à une recherche sur la page d'accueil
+        [HttpGet]
+        public IActionResult RechercheJeuxVideo(string titre, string annee_sortie, string console, string genre, string editeur)
+        {
+           var jeuxVideoParametre = _dbContext.JeuVideos.AsQueryable();
+            Console.WriteLine($"Critères de recherche : Titre = {titre}, Année de sortie = {annee_sortie}, Console = {console}, Genre = {genre}, Éditeur = {editeur}");
+
+
+            if (!string.IsNullOrEmpty(titre))
+            {
+                jeuxVideoParametre = jeuxVideoParametre.Where(j => j.titre.Contains(titre));
+            }
+
+            if (annee_sortie != null)
+            {
+                jeuxVideoParametre = jeuxVideoParametre.Where(j => j.annee_sortie == annee_sortie);
+            }
+
+            if (!string.IsNullOrEmpty(console))
+            {
+                jeuxVideoParametre = jeuxVideoParametre.Where(j => j.console.Contains(console));
+            }
+
+            if (!string.IsNullOrEmpty(genre))
+            {
+                jeuxVideoParametre = jeuxVideoParametre.Where(j => j.genre.Contains(genre));
+            }
+
+            if (!string.IsNullOrEmpty(editeur))
+            {
+                jeuxVideoParametre = jeuxVideoParametre.Where(j => j.editeur.Contains(editeur));
+            }
+
+            var sqlQuery = jeuxVideoParametre.ToQueryString();
+            Console.WriteLine($"Requête SQL générée : {sqlQuery}");
+
+
+            var resultatsRecherche = jeuxVideoParametre.ToList();
+            Console.WriteLine($"Nombre de résultats trouvés : {resultatsRecherche.Count}");
+
+            return View("ResultatRecherche", resultatsRecherche);
+
+        }
+
+     
+
     }
 }
