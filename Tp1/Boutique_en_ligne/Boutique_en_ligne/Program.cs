@@ -12,6 +12,7 @@ builder.Services.AddSession();                                                  
 builder.Services.AddControllersWithViews();                                                 
 builder.Services.AddHttpContextAccessor();                                                  // Pour accéder à la session
 
+
 var app = builder.Build();
 app.UseSession();
 
@@ -63,6 +64,12 @@ app.UseMvc(routes =>
      name: "AccueilVendeur",
      template: "Vendeur/Index",
      defaults: new { controller = "Vendeur", action = "Index" }
+     );
+
+    routes.MapRoute(
+     name: "Panier",
+     template: "Client/Panier",
+     defaults: new { controller = "Client", action = "Panier" }
      );
 
 
