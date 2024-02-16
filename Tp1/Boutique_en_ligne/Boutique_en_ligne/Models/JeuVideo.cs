@@ -5,6 +5,7 @@
         public JeuVideo()
         {
             Utilisateurs = new List<Utilisateur>();
+            EstVendu = false;
         }
 
         public int? Id { get; set; }
@@ -16,6 +17,7 @@
         public string? pochette_jeu { get; set; }
         public string? capture_ecran { get; set; }
         public float? prix_vente { get; set; }
+        public bool EstVendu { get; set; } 
 
         //many to many with Utilisateur
         public ICollection<Utilisateur> Utilisateurs { get; set; }

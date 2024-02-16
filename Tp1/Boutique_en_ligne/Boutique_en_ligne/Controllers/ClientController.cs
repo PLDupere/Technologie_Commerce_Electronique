@@ -27,6 +27,7 @@ namespace Boutique_en_ligne.Controllers
             return View();
         }
 
+
         public IActionResult Panier()
         {
             // Récupérer l'ID de l'utilisateur actuel
@@ -34,15 +35,31 @@ namespace Boutique_en_ligne.Controllers
 
             // Récupérer les jeux non vendus dans le panier de l'utilisateur
             var jeuxNonVendus = _dbContext.Paniers
-                .Include(p => p.Jeux)
-                .Where(p => p.UserId == userId && !p.EstVendu)
+                .Where(p => p.UserId == userId)
                 .SelectMany(p => p.Jeux)
+                .Where(j => !j.EstVendu)
                 .ToList();
+
+            // Définir les messages ViewBag
+            ViewBag.SoldeInsuffisant = TempData["SoldeInsuffisant"];
+            ViewBag.AchatReussi = TempData["AchatReussi"];
 
             return View(jeuxNonVendus);
         }
 
+        public IActionResult Facture()
+        {
+            var userId = HttpContext.Session.GetString("UserId");
+            var userIdInt = Convert.ToInt32(userId);
 
+            // Récupérer les factures du client à partir de la base de données
+            var factures = _dbContext.Factures
+                .Include(f => f.JeuxVideos)
+                .Where(f => f.ClientId == userIdInt)
+                .ToList();
+
+            return View(factures);
+        }
 
 
 
@@ -240,7 +257,7 @@ namespace Boutique_en_ligne.Controllers
             var jeuVideo = _dbContext.JeuVideos.FirstOrDefault(j => j.Id == id);
 
             var userId = HttpContext.Session.GetString("UserId");
-            var panier = _dbContext.Paniers.FirstOrDefault(p => p.UserId == userId);
+            var panier = _dbContext.Paniers.Include(p => p.Jeux).FirstOrDefault(p => p.UserId == userId);
 
             if (panier == null)
             {
@@ -248,7 +265,6 @@ namespace Boutique_en_ligne.Controllers
                 {
                     UserId = userId,
                     Jeux = new List<JeuVideo> { jeuVideo },
-                    EstVendu = false
                 };
                 _dbContext.Paniers.Add(panier);
             }
@@ -259,7 +275,81 @@ namespace Boutique_en_ligne.Controllers
 
             _dbContext.SaveChanges();
 
-            return RedirectToAction("Index");
+
+            return RedirectToAction("Panier");
+        }
+
+
+        [HttpPost]
+        public IActionResult SupprimerDuPanier(int id)
+        {
+            var userId = HttpContext.Session.GetString("UserId");
+            var panier = _dbContext.Paniers.Include(p => p.Jeux).FirstOrDefault(p => p.UserId == userId);
+
+            if (panier != null)
+            {
+                var jeuASupprimer = panier.Jeux.FirstOrDefault(j => j.Id == id);
+
+                if (jeuASupprimer != null)
+                {
+                    panier.Jeux.Remove(jeuASupprimer);
+                    _dbContext.SaveChanges();
+                }
+            }
+
+            return RedirectToAction("Panier");
+        }
+
+
+        [HttpPost]
+        public IActionResult Payer()
+        {
+            var userId = HttpContext.Session.GetString("UserId");
+
+            var panier = _dbContext.Paniers.Include(p => p.Jeux)
+                                            .FirstOrDefault(p => p.UserId == userId);
+
+            // Convertir user id en int
+            int id = int.Parse(userId);
+
+            var utilisateur = _dbContext.Clients.FirstOrDefault(c => c.Id == id);
+
+            if (utilisateur == null)
+            {
+                return NotFound();
+            }
+
+            var montantTotalAchat = panier.Jeux.Where(j => !j.EstVendu).Sum(j => j.prix_vente ?? 0);
+
+            if (utilisateur.solde < montantTotalAchat)
+            {
+                TempData["SoldeInsuffisant"] = "Votre solde est insuffisant pour effectuer cet achat.";
+                return RedirectToAction("Panier");
+            }
+
+            utilisateur.solde -= montantTotalAchat;
+
+            var facture = new Facture
+            {
+                ClientId = id,
+                date_achat = DateTime.Now,
+                montant_total = montantTotalAchat,
+                nombre_article = panier.Jeux.Count(j => !j.EstVendu),
+                JeuxVideos = panier.Jeux.Where(j => !j.EstVendu).ToList()
+            };
+
+            foreach (var jeu in facture.JeuxVideos)
+            {
+                jeu.EstVendu = true;
+            }
+
+            // Ajouter la facture à la base de données
+            _dbContext.Factures.Add(facture);
+
+            _dbContext.SaveChanges();
+
+            TempData["AchatReussi"] = "Votre achat a été effectué avec succès.";
+            return RedirectToAction("Panier");
         }
 
 

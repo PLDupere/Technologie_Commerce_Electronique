@@ -73,8 +73,14 @@ app.UseMvc(routes =>
      defaults: new { controller = "Client", action = "Panier" }
      );
 
+    routes.MapRoute(
+     name: "Facture",
+     template: "Client/Facture",
+     defaults: new { controller = "Client", action = "Facture" }
+     );
 
-   routes.MapRoute(
+
+    routes.MapRoute(
     name: "AjouterJeu",
     template: "JeuVideo/Ajouter",
     defaults: new { controller = "JeuVideo", action = "AddJeuVideo" }

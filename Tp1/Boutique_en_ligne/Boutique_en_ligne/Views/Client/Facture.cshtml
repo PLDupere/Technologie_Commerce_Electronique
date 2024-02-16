@@ -1,0 +1,46 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "_Layout";
+}
+
+@model List<Boutique_en_ligne.Models.Facture>
+
+<h2>Vos Factures</h2>
+
+@if (Model.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Numéro de facture</th>
+                <th>Date d'achat</th>
+                <th>Nombre d'articles</th>
+                <th>Montant total</th>
+                <th>Jeux achetés</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var facture in Model)
+            {
+                <tr>
+                    <td>@facture.Id</td>
+                    <td>@facture.date_achat</td>
+                    <td>@facture.nombre_article</td>
+                    <td>@facture.montant_total</td>
+                    <td>
+                        <ul>
+                            @foreach (var jeu in facture.JeuxVideos)
+                            {
+                                <li>@jeu.titre - @jeu.prix_vente $</li>
+                            }
+                        </ul>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Aucune facture disponible pour ce client.</p>
+}

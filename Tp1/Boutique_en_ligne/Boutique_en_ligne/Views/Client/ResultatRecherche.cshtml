@@ -1,6 +1,7 @@
 ﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
     Layout = "_Layout";
+
 }
 
 @model List<Boutique_en_ligne.Models.JeuVideo>
@@ -18,10 +19,12 @@
                     <th>Genre</th>
                     <th>Éditeur</th>
                     <th>Prix</th>
+                    <th>Pochette</th>
+                    <th>Capture d'écran</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var jeu in Model)
+                @foreach (var jeu in Model.Where(j => !j.EstVendu))
                 {
                     <tr>
                         <td>@jeu.titre</td>
@@ -42,8 +45,6 @@
                 }
             </tbody>
         </table>
-        <button type="button" class="btn btn-primary" onclick="location.href='/Client/Index'">Retour à la page d'accueil</button>
-
     }
     else
     {

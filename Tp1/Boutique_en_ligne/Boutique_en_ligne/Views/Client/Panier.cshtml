@@ -35,7 +35,7 @@
                         <td><img src="@jeu.pochette_jeu" alt="Pochette du jeu" /></td>
                         <td><img src="@jeu.capture_ecran" alt="Capture d'écran" /></td>
                         <td>
-                            <form asp-controller="Panier" asp-action="SupprimerDuPanier" method="post">
+                            <form asp-controller="Client" asp-action="SupprimerDuPanier" method="post">
                                 <input type="hidden" name="id" value="@jeu.Id" />
                                 <button type="submit" class="btn btn-danger">Supprimer</button>
                             </form>
@@ -44,12 +44,24 @@
                 }
             </tbody>
         </table>
-        <form asp-controller="Panier" asp-action="Payer" method="post">
+        @if (ViewBag.SoldeInsuffisant != null)
+        {
+            <div class="alert alert-danger" role="alert">
+                @ViewBag.SoldeInsuffisant
+            </div>
+        }
+        <form asp-controller="Client" asp-action="Payer" method="post">
             <button type="submit" class="btn btn-success">Payer</button>
         </form>
     }
     else
     {
         <p>Votre panier est vide.</p>
+        @if (ViewBag.AchatReussi != null)
+        {
+            <div class="alert alert-success" role="alert">
+                @ViewBag.AchatReussi
+            </div>
+        }
     }
 </div>
