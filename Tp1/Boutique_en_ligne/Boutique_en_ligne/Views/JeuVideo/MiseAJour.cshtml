@@ -1,0 +1,72 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model Boutique_en_ligne.Models.JeuVideo
+
+@{
+    Layout = "_Layout";
+}
+
+<h2>Mise à Jour du Jeu Vidéo</h2>
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <form id="MiseAJourJeuForm" asp-action="UpdateJeuVideo" asp-controller="JeuVideo" method="post">
+
+                        <input type="hidden" asp-for="Id" />
+
+                        <div class="form-group mb-4">
+                            <label for="titre">Titre:</label>
+                            <input type="text" class="form-control" id="titre" asp-for="titre" name="titre" required>
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <label for="annee_sortie">Année de sortie:</label>
+                            <input type="text" class="form-control" id="annee_sortie" asp-for="annee_sortie" name="annee_sortie" required>
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <label for="console">Console du jeu:</label>
+                            <input type="text" class="form-control" id="console" asp-for="console" name="console" required>
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <label for="genre">Genre:</label>
+                            <input type="text" class="form-control" id="genre" asp-for="genre" name="genre" required>
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <label for="editeur">Éditeur:</label>
+                            <input type="text" class="form-control" id="editeur" asp-for="editeur" name="editeur" required>
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <label for="pochette_jeu">Pochette du jeu:</label>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="pochette_jeu" asp-for="pochette_jeu" name="pochette_jeu">
+                                <label class="custom-file-label" for="pochette_jeu"></label>
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <label for="capture_ecran">Captures d'écran:</label>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="capture_ecran" asp-for="capture_ecran" name="capture_ecran">
+                                <label class="custom-file-label" for="capture_ecran"></label>
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <label for="prix_vente">Prix de vente:</label>
+                            <input type="number" class="form-control" id="prix_vente" asp-for="prix_vente" name="prix_vente" required>
+                        </div>
+
+                        <div class="form-group text-center mt-4">
+                            <button type="submit" class="btn btn-primary">Mettre à Jour le jeu</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

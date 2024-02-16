@@ -1,0 +1,55 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "_Layout";
+}
+
+@model List<Boutique_en_ligne.Models.JeuVideo>
+
+<div class="container">
+    <h2>Résultats de la recherche</h2>
+    @if (Model != null && Model.Count > 0)
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Titre</th>
+                    <th>Année de sortie</th>
+                    <th>Console</th>
+                    <th>Genre</th>
+                    <th>Éditeur</th>
+                    <th>Prix</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var jeu in Model)
+                {
+                    <tr>
+                        <td>@jeu.titre</td>
+                        <td>@jeu.annee_sortie</td>
+                        <td>@jeu.console</td>
+                        <td>@jeu.genre</td>
+                        <td>@jeu.editeur</td>
+                        <td>@jeu.prix_vente</td>
+                        <td><img src="@jeu.pochette_jeu" alt="Pochette du jeu" /></td>
+                        <td><img src="@jeu.capture_ecran" alt="Capture d'écran" /></td>
+                        <td>
+                            <form asp-controller="Client" asp-action="AjouterAuPanier" method="get">
+                                <input type="hidden" name="id" value="@jeu.Id" />
+                                <button type="submit" class="btn btn-success">Ajouter au panier</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <button type="button" class="btn btn-primary" onclick="location.href='/Client/Index'">Retour à la page d'accueil</button>
+
+    }
+    else
+    {
+        <p>Aucun jeu trouvé.</p>
+        <button type="button" class="btn btn-primary" onclick="location.href='/Client/Index'">Retour à la page d'accueil</button>
+
+
+    }
+</div>

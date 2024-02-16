@@ -1,5 +1,52 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model List<Boutique_en_ligne.Models.JeuVideo>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
 @{
+    Layout = "_Layout";
 }
+
+<div class="container">
+    <h2>Panier</h2>
+    @if (Model != null && Model.Any())
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Titre</th>
+                    <th>Année de sortie</th>
+                    <th>Console</th>
+                    <th>Genre</th>
+                    <th>Éditeur</th>
+                    <th>Prix</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var jeu in Model)
+                {
+                    <tr>
+                        <td>@jeu.titre</td>
+                        <td>@jeu.annee_sortie</td>
+                        <td>@jeu.console</td>
+                        <td>@jeu.genre</td>
+                        <td>@jeu.editeur</td>
+                        <td>@jeu.prix_vente</td>
+                        <td>
+                            <form asp-controller="Panier" asp-action="SupprimerDuPanier" method="post">
+                                <input type="hidden" name="id" value="@jeu.Id" />
+                                <button type="submit" class="btn btn-danger">Supprimer</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <form asp-controller="Panier" asp-action="Payer" method="post">
+            <button type="submit" class="btn btn-success">Payer</button>
+        </form>
+    }
+    else
+    {
+        <p>Votre panier est vide.</p>
+    }
+</div>

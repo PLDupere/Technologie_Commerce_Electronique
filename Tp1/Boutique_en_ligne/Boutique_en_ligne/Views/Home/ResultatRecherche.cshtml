@@ -20,6 +20,8 @@
                     <th>Genre</th>
                     <th>Éditeur</th>
                     <th>Prix</th>
+                    <th>Pochette</th>
+                    <th>Capture d'écran</th>
                 </tr>
             </thead>
             <tbody>
@@ -32,8 +34,11 @@
                         <td>@jeu.genre</td>
                         <td>@jeu.editeur</td>
                         <td>@jeu.prix_vente</td>
+                        <td><img src="@jeu.pochette_jeu" alt="Pochette du jeu" /></td>
+                        <td><img src="@jeu.capture_ecran" alt="Capture d'écran" /></td>
                     </tr>
                 }
+
             </tbody>
         </table>
         <button type="button" class="btn btn-primary" onclick="location.href='/Home/Index'">Retour à la page d'accueil</button>

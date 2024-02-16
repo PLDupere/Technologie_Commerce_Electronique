@@ -1,7 +1,11 @@
 ﻿using Boutique_en_ligne.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-
+using Microsoft.EntityFrameworkCore;
+using System.Text.Json;
+using System.Text;
+using System.Linq;
 
 namespace Boutique_en_ligne.Controllers
 {
@@ -22,6 +26,31 @@ namespace Boutique_en_ligne.Controllers
         {
             return View();
         }
+
+        public IActionResult Panier()
+        {
+            // Récupérer les IDs des jeux depuis la session
+            byte[] data = HttpContext.Session.Get("Panier");
+            List<int> idsJeux;
+            if (data != null && data.Length > 0)
+            {
+                idsJeux = JsonSerializer.Deserialize<List<int>>(Encoding.UTF8.GetString(data));
+            }
+            else
+            {
+                // Si le panier est vide, retourner une vue avec une liste vide
+                return View(new List<JeuVideo>());
+            }
+
+            // Récupérer les détails des jeux correspondants aux IDs depuis la base de données
+            var jeuxDansPanier = _dbContext.JeuVideos.Where(j => idsJeux.Contains(j.Id ?? 0)).ToList();
+
+            // Passer les détails des jeux à la vue
+            return View(jeuxDansPanier);
+        }
+
+
+
 
         // Db context et hashage du mot de passe
         private readonly BoutiqueJeuDbContext _dbContext;
@@ -165,6 +194,83 @@ namespace Boutique_en_ligne.Controllers
 
             return RedirectToAction("Index", "Client");
         }
+
+        // Récupérer les jeux vidéos de la BD suite à une recherche sur la page d'accueil
+        [HttpGet]
+        public IActionResult RechercheJeuxVideo(string titre, string annee_sortie, string console, string genre, string editeur)
+        {
+            var jeuxVideoParametre = _dbContext.JeuVideos.AsQueryable();
+            Console.WriteLine($"Critères de recherche : Titre = {titre}, Année de sortie = {annee_sortie}, Console = {console}, Genre = {genre}, Éditeur = {editeur}");
+
+
+            if (!string.IsNullOrEmpty(titre))
+            {
+                jeuxVideoParametre = jeuxVideoParametre.Where(j => j.titre.Contains(titre));
+            }
+
+            if (annee_sortie != null)
+            {
+                jeuxVideoParametre = jeuxVideoParametre.Where(j => j.annee_sortie == annee_sortie);
+            }
+
+            if (!string.IsNullOrEmpty(console))
+            {
+                jeuxVideoParametre = jeuxVideoParametre.Where(j => j.console.Contains(console));
+            }
+
+            if (!string.IsNullOrEmpty(genre))
+            {
+                jeuxVideoParametre = jeuxVideoParametre.Where(j => j.genre.Contains(genre));
+            }
+
+            if (!string.IsNullOrEmpty(editeur))
+            {
+                jeuxVideoParametre = jeuxVideoParametre.Where(j => j.editeur.Contains(editeur));
+            }
+
+            var sqlQuery = jeuxVideoParametre.ToQueryString();
+            Console.WriteLine($"Requête SQL générée : {sqlQuery}");
+
+
+            var resultatsRecherche = jeuxVideoParametre.ToList();
+            Console.WriteLine($"Nombre de résultats trouvés : {resultatsRecherche.Count}");
+
+            return View("ResultatRecherche", resultatsRecherche);
+
+        }
+
+        [HttpGet]
+        public IActionResult AjouterAuPanier(int id)
+        {
+            var jeuVideo = _dbContext.JeuVideos.FirstOrDefault(j => j.Id == id);
+
+            if (jeuVideo == null)
+            {
+                return NotFound();
+            }
+
+            byte[] data = HttpContext.Session.Get("Panier");
+
+            List<int> idsJeux;
+            if (data != null && data.Length > 0)
+            {
+                idsJeux = JsonSerializer.Deserialize<List<int>>(Encoding.UTF8.GetString(data));
+            }
+            else
+            {
+                idsJeux = new List<int>();
+            }
+
+            idsJeux.Add(id);
+            byte[] newData = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(idsJeux));
+            HttpContext.Session.Set("Panier", newData);
+
+            return RedirectToAction("Index");
+        }
+
+
+
+
 
         [HttpDelete]
         public IActionResult DeleteClient(int clientId)

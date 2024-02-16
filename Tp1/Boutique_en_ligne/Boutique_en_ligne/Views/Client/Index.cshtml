@@ -1,5 +1,35 @@
 ﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
     Layout = "_Layout";
+
+
 }
-Allo Client
+@model Boutique_en_ligne.Models.JeuVideo
+
+<div class="container">
+    <h2>Recherche de jeux vidéo</h2>
+    <form method="GET" asp-controller="Client" asp-action="RechercheJeuxVideo" id="searchForm">
+        <div class="form-group">
+            <label for="titre">Titre du jeu :</label>
+            <input asp-for="titre" class="form-control" id="titre" />
+        </div>
+        <div class="form-group">
+            <label for="annee_sortie">Année de sortie :</label>
+            <input asp-for="annee_sortie" class="form-control" id="annee_sortie" />
+        </div>
+        <div class="form-group">
+            <label for="console">Console du jeu :</label>
+            <input asp-for="console" class="form-control" id="console" />
+        </div>
+        <div class="form-group">
+            <label for="genre">Genre :</label>
+            <input asp-for="genre" class="form-control" id="genre" />
+        </div>
+        <div class="form-group">
+            <label for="editeur">Éditeur :</label>
+            <input asp-for="editeur" class="form-control" id="editeur" />
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary">Rechercher</button>
+    </form>
+</div>

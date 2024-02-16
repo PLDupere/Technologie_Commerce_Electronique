@@ -36,8 +36,8 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50XFByb2ZpbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/noemi/Desktop/Commerce électronique/Technologie_Commerce_Electronique/Tp1/Boutique_en_ligne/Boutique_en_ligne/Views/Client/Recherche.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50XFJlY2hlcmNoZS5jc2h0bWw=
+[C:/Users/noemi/Desktop/Commerce électronique/Technologie_Commerce_Electronique/Tp1/Boutique_en_ligne/Boutique_en_ligne/Views/Client/ResultatRecherche.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50XFJlc3VsdGF0UmVjaGVyY2hlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/noemi/Desktop/Commerce électronique/Technologie_Commerce_Electronique/Tp1/Boutique_en_ligne/Boutique_en_ligne/Views/Client/Statistiques.cshtml]
@@ -60,8 +60,20 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxSZXN1bHRhdFJlY2hlcmNoZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/noemi/Desktop/Commerce électronique/Technologie_Commerce_Electronique/Tp1/Boutique_en_ligne/Boutique_en_ligne/Views/JeuVideo/Ajout.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSmV1VmlkZW9cQWpvdXQuY3NodG1s
+[C:/Users/noemi/Desktop/Commerce électronique/Technologie_Commerce_Electronique/Tp1/Boutique_en_ligne/Boutique_en_ligne/Views/JeuVideo/Ajouter.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSmV1VmlkZW9cQWpvdXRlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/noemi/Desktop/Commerce électronique/Technologie_Commerce_Electronique/Tp1/Boutique_en_ligne/Boutique_en_ligne/Views/JeuVideo/MiseAJour.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSmV1VmlkZW9cTWlzZUFKb3VyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/noemi/Desktop/Commerce électronique/Technologie_Commerce_Electronique/Tp1/Boutique_en_ligne/Boutique_en_ligne/Views/JeuVideo/Modifier.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSmV1VmlkZW9cTW9kaWZpZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/noemi/Desktop/Commerce électronique/Technologie_Commerce_Electronique/Tp1/Boutique_en_ligne/Boutique_en_ligne/Views/JeuVideo/Recherche.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSmV1VmlkZW9cUmVjaGVyY2hlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/noemi/Desktop/Commerce électronique/Technologie_Commerce_Electronique/Tp1/Boutique_en_ligne/Boutique_en_ligne/Views/Shared/_Layout.cshtml]
@@ -74,4 +86,8 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/noemi/Desktop/Commerce électronique/Technologie_Commerce_Electronique/Tp1/Boutique_en_ligne/Boutique_en_ligne/Views/Vendeur/Profil.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmVuZGV1clxQcm9maWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/noemi/Desktop/Commerce électronique/Technologie_Commerce_Electronique/Tp1/Boutique_en_ligne/Boutique_en_ligne/Views/Vendeur/Statistiques.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmVuZGV1clxTdGF0aXN0aXF1ZXMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
