@@ -65,6 +65,29 @@ app.UseMvc(routes =>
      defaults: new { controller = "Vendeur", action = "Index" }
      );
 
+   routes.MapRoute(
+    name: "AjouterJeu",
+    template: "JeuVideo/Ajouter",
+    defaults: new { controller = "JeuVideo", action = "AddJeuVideo" }
+    );
+
+   routes.MapRoute(
+    name: "ModifierJeu",
+    template: "JeuVideo/Modifier",
+    defaults: new { controller = "JeuVideo", action = "GetJeuVideo" }
+    );
+
+    routes.MapRoute(
+     name: "MiseAJourJeu",
+     template: "JeuVideo/MiseAJour/{id}",
+     defaults: new { controller = "JeuVideo", action = "UpdateJeuVideo" }
+     );
+
+    routes.MapRoute(
+     name: "RecherhceAPI",
+     template: "JeuVideo/Recherche",
+     defaults: new { controller = "JeuVideo", action = "Recherche" }
+     );
 
 });
 

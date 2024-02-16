@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Boutique_en_ligne.Models;
+using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 
 namespace Boutique_en_ligne.Controllers
 {
@@ -10,6 +12,28 @@ namespace Boutique_en_ligne.Controllers
         {
             _dbContext = dbContext;
         }
+        public IActionResult Ajouter()
+        {
+            return View();
+        }
+
+        public IActionResult Modifier()
+        {
+            List<Models.JeuVideo> jeuVideos = this._dbContext.JeuVideos.ToList();
+            return View(jeuVideos);
+        }
+
+        public IActionResult MiseAJour(int id)
+        {
+            Models.JeuVideo jeuVideo = _dbContext.JeuVideos.FirstOrDefault(j => j.Id == id);
+
+            if (jeuVideo == null)
+            {
+                return NotFound();
+            }
+
+            return View(jeuVideo);
+        }
 
         [HttpPost]
         public IActionResult AddJeuVideo(Models.JeuVideo jeuVideo)
@@ -17,8 +41,7 @@ namespace Boutique_en_ligne.Controllers
             _dbContext.JeuVideos.Add(jeuVideo);
             _dbContext.SaveChanges();
 
-            return View();
-            //return View("ConvertOrAddUser", convertOrAddUser);
+            return RedirectToAction("Modifier", "JeuVideo");
         }
 
         [HttpGet]
@@ -26,7 +49,12 @@ namespace Boutique_en_ligne.Controllers
         {
             Models.JeuVideo jeuVideo = _dbContext.JeuVideos.Where(j => j.Id == jeuVideoId).First();
 
-            return View(jeuVideo);
+            if (jeuVideo == null)
+            {
+                return NotFound();
+            }
+
+            return RedirectToAction("Modifier", "JeuVideo");
         }
 
         [HttpGet]
@@ -37,24 +65,30 @@ namespace Boutique_en_ligne.Controllers
             return View(jeuxVideos);
         }
 
-        [HttpPut]
-        public IActionResult UpdateJeuVideo(int jeuVideoId, Models.JeuVideo jeuVideoToUpdate)
+        [HttpPost]
+        public IActionResult UpdateJeuVideo(int Id, Models.JeuVideo jeuVideoToUpdate)
         {
-            Models.JeuVideo jeuVideo = _dbContext.JeuVideos.Where(j => j.Id == jeuVideoId).First();
+            Models.JeuVideo jeuVideo = _dbContext.JeuVideos.Where(j => j.Id == Id).First();
+            Debug.WriteLine($"Before Update - Id: {jeuVideo.Id}");
+            Debug.WriteLine($"IDDDD {Id}");
             jeuVideo = jeuVideoToUpdate;
             _dbContext.SaveChanges();
 
-            return View(jeuVideo);
+            return RedirectToAction("Modifier", "JeuVideo");
         }
 
-        [HttpDelete]
-        public IActionResult DeleteJeuVideo(int jeuVideoId)
+        [HttpPost]
+        [ApiExplorerSettings(IgnoreApi = true)]
+        [Route("JeuVideo/DeleteJeuVideo/{Id:int}")]
+        public IActionResult DeleteJeuVideo(int Id)
         {
-            Models.JeuVideo jeuVideo = _dbContext.JeuVideos.Where(j => j.Id == jeuVideoId).First();
-            _dbContext.JeuVideos.Remove(jeuVideo);
-            _dbContext.SaveChanges();
-
-            return View();
+            Models.JeuVideo jeuVideo = _dbContext.JeuVideos.Where(j => j.Id == Id).First();
+            if (jeuVideo != null)
+            {
+                _dbContext.JeuVideos.Remove(jeuVideo);
+                _dbContext.SaveChanges();
+            }
+            return RedirectToAction("Modifier", "JeuVideo");
         }
     }
 }

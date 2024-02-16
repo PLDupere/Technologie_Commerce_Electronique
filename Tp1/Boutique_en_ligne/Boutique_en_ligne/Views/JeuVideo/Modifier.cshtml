@@ -4,6 +4,7 @@
 @{
 }
 
+
 @model List<Boutique_en_ligne.Models.JeuVideo>
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
@@ -40,8 +41,10 @@
                     <td><img src="@jeu.capture_ecran" alt="Capture d'écran" style="max-width: 100px; max-height: 100px;" /></td>
                     <td>@jeu.prix_vente</td>
                     <td>
-                        <!-- Bouton pour modifier (à rediriger vers l'action de modification dans votre contrôleur) -->
-                        <a class="btn btn-primary" href="@Url.Action("UpdateJeuVideo", "JeuVideo", new { id = jeu.Id })">Modifier</a>
+
+                        <form asp-action="MiseAJour" asp-controller="JeuVideo" asp-route-id="@jeu.Id" method="post">
+                            <input type="submit" value="Modifier" class="btn btn-primary" />
+                        </form>
 
                         <form asp-action="DeleteJeuVideo" asp-controller="JeuVideo" asp-route-id="@jeu.Id" method="post">
                             <input type="submit" value="Supprimer" class="btn btn-danger" />
