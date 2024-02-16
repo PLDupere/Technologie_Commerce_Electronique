@@ -29,25 +29,19 @@ namespace Boutique_en_ligne.Controllers
 
         public IActionResult Panier()
         {
-            // Récupérer les IDs des jeux depuis la session
-            byte[] data = HttpContext.Session.Get("Panier");
-            List<int> idsJeux;
-            if (data != null && data.Length > 0)
-            {
-                idsJeux = JsonSerializer.Deserialize<List<int>>(Encoding.UTF8.GetString(data));
-            }
-            else
-            {
-                // Si le panier est vide, retourner une vue avec une liste vide
-                return View(new List<JeuVideo>());
-            }
+            // Récupérer l'ID de l'utilisateur actuel
+            var userId = HttpContext.Session.GetString("UserId");
 
-            // Récupérer les détails des jeux correspondants aux IDs depuis la base de données
-            var jeuxDansPanier = _dbContext.JeuVideos.Where(j => idsJeux.Contains(j.Id ?? 0)).ToList();
+            // Récupérer les jeux non vendus dans le panier de l'utilisateur
+            var jeuxNonVendus = _dbContext.Paniers
+                .Include(p => p.Jeux)
+                .Where(p => p.UserId == userId && !p.EstVendu)
+                .SelectMany(p => p.Jeux)
+                .ToList();
 
-            // Passer les détails des jeux à la vue
-            return View(jeuxDansPanier);
+            return View(jeuxNonVendus);
         }
+
 
 
 
@@ -242,32 +236,31 @@ namespace Boutique_en_ligne.Controllers
         [HttpGet]
         public IActionResult AjouterAuPanier(int id)
         {
+            // Récupérer le jeu vidéo avec l'ID donné
             var jeuVideo = _dbContext.JeuVideos.FirstOrDefault(j => j.Id == id);
 
-            if (jeuVideo == null)
-            {
-                return NotFound();
-            }
+            var userId = HttpContext.Session.GetString("UserId");
+            var panier = _dbContext.Paniers.FirstOrDefault(p => p.UserId == userId);
 
-            byte[] data = HttpContext.Session.Get("Panier");
-
-            List<int> idsJeux;
-            if (data != null && data.Length > 0)
+            if (panier == null)
             {
-                idsJeux = JsonSerializer.Deserialize<List<int>>(Encoding.UTF8.GetString(data));
+                panier = new Panier
+                {
+                    UserId = userId,
+                    Jeux = new List<JeuVideo> { jeuVideo },
+                    EstVendu = false
+                };
+                _dbContext.Paniers.Add(panier);
             }
             else
             {
-                idsJeux = new List<int>();
+                panier.Jeux.Add(jeuVideo);
             }
 
-            idsJeux.Add(id);
-            byte[] newData = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(idsJeux));
-            HttpContext.Session.Set("Panier", newData);
+            _dbContext.SaveChanges();
 
             return RedirectToAction("Index");
         }
-
 
 
 

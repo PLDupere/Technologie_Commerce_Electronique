@@ -15,6 +15,8 @@ namespace Boutique_en_ligne
         public DbSet<Models.JeuVideo> JeuVideos { get; set; }
         public DbSet<Models.Utilisateur> Utilisateurs { get; set; }
         public DbSet<Models.Vendeur> Vendeurs { get; set; }
+        public DbSet<Models.Panier> Paniers { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder dbContextOptionsBuilder)
         {
