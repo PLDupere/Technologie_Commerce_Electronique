@@ -89,6 +89,11 @@ app.UseMvc(routes =>
      defaults: new { controller = "JeuVideo", action = "Recherche" }
      );
 
+    routes.MapRoute(
+     name: "Afficher",
+     template: "JeuVideo/Afficher",
+     defaults: new { controller = "JeuVideo", action = "Afficher" }
+     );
 });
 
 
