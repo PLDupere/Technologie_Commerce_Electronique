@@ -9,65 +9,85 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Boutique_en_ligne
 build_property.RootNamespace = Boutique_en_ligne
-build_property.ProjectDir = C:\Users\noemi\Desktop\Commerce électronique\Technologie_Commerce_Electronique\Tp1\Boutique_en_ligne\Boutique_en_ligne\
+build_property.ProjectDir = C:\Users\pierl\Documents\GitPLD\Technologie_Commerce_Electronique\Tp1\Boutique_en_ligne\Boutique_en_ligne\
 build_property.RazorLangVersion = 7.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\noemi\Desktop\Commerce électronique\Technologie_Commerce_Electronique\Tp1\Boutique_en_ligne\Boutique_en_ligne
+build_property.MSBuildProjectDirectory = C:\Users\pierl\Documents\GitPLD\Technologie_Commerce_Electronique\Tp1\Boutique_en_ligne\Boutique_en_ligne
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/noemi/Desktop/Commerce électronique/Technologie_Commerce_Electronique/Tp1/Boutique_en_ligne/Boutique_en_ligne/Views/Client/CarteCredit.cshtml]
+[C:/Users/pierl/Documents/GitPLD/Technologie_Commerce_Electronique/Tp1/Boutique_en_ligne/Boutique_en_ligne/Views/Client/CarteCredit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50XENhcnRlQ3JlZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/noemi/Desktop/Commerce électronique/Technologie_Commerce_Electronique/Tp1/Boutique_en_ligne/Boutique_en_ligne/Views/Client/Factures.cshtml]
+[C:/Users/pierl/Documents/GitPLD/Technologie_Commerce_Electronique/Tp1/Boutique_en_ligne/Boutique_en_ligne/Views/Client/Factures.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50XEZhY3R1cmVzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/noemi/Desktop/Commerce électronique/Technologie_Commerce_Electronique/Tp1/Boutique_en_ligne/Boutique_en_ligne/Views/Client/Index.cshtml]
+[C:/Users/pierl/Documents/GitPLD/Technologie_Commerce_Electronique/Tp1/Boutique_en_ligne/Boutique_en_ligne/Views/Client/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50XEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/noemi/Desktop/Commerce électronique/Technologie_Commerce_Electronique/Tp1/Boutique_en_ligne/Boutique_en_ligne/Views/Client/Panier.cshtml]
+[C:/Users/pierl/Documents/GitPLD/Technologie_Commerce_Electronique/Tp1/Boutique_en_ligne/Boutique_en_ligne/Views/Client/Panier.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50XFBhbmllci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/noemi/Desktop/Commerce électronique/Technologie_Commerce_Electronique/Tp1/Boutique_en_ligne/Boutique_en_ligne/Views/Client/Profil.cshtml]
+[C:/Users/pierl/Documents/GitPLD/Technologie_Commerce_Electronique/Tp1/Boutique_en_ligne/Boutique_en_ligne/Views/Client/Profil.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50XFByb2ZpbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/noemi/Desktop/Commerce électronique/Technologie_Commerce_Electronique/Tp1/Boutique_en_ligne/Boutique_en_ligne/Views/Client/Recherche.cshtml]
+[C:/Users/pierl/Documents/GitPLD/Technologie_Commerce_Electronique/Tp1/Boutique_en_ligne/Boutique_en_ligne/Views/Client/Recherche.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50XFJlY2hlcmNoZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/noemi/Desktop/Commerce électronique/Technologie_Commerce_Electronique/Tp1/Boutique_en_ligne/Boutique_en_ligne/Views/Client/Statistiques.cshtml]
+[C:/Users/pierl/Documents/GitPLD/Technologie_Commerce_Electronique/Tp1/Boutique_en_ligne/Boutique_en_ligne/Views/Client/Statistiques.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50XFN0YXRpc3RpcXVlcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/noemi/Desktop/Commerce électronique/Technologie_Commerce_Electronique/Tp1/Boutique_en_ligne/Boutique_en_ligne/Views/Home/Authentification.cshtml]
+[C:/Users/pierl/Documents/GitPLD/Technologie_Commerce_Electronique/Tp1/Boutique_en_ligne/Boutique_en_ligne/Views/Home/Authentification.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxBdXRoZW50aWZpY2F0aW9uLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/noemi/Desktop/Commerce électronique/Technologie_Commerce_Electronique/Tp1/Boutique_en_ligne/Boutique_en_ligne/Views/Home/Index.cshtml]
+[C:/Users/pierl/Documents/GitPLD/Technologie_Commerce_Electronique/Tp1/Boutique_en_ligne/Boutique_en_ligne/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/noemi/Desktop/Commerce électronique/Technologie_Commerce_Electronique/Tp1/Boutique_en_ligne/Boutique_en_ligne/Views/Home/Inscription.cshtml]
+[C:/Users/pierl/Documents/GitPLD/Technologie_Commerce_Electronique/Tp1/Boutique_en_ligne/Boutique_en_ligne/Views/Home/Inscription.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbnNjcmlwdGlvbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/noemi/Desktop/Commerce électronique/Technologie_Commerce_Electronique/Tp1/Boutique_en_ligne/Boutique_en_ligne/Views/JeuVideo/Ajout.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSmV1VmlkZW9cQWpvdXQuY3NodG1s
+[C:/Users/pierl/Documents/GitPLD/Technologie_Commerce_Electronique/Tp1/Boutique_en_ligne/Boutique_en_ligne/Views/JeuVideo/Afficher.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSmV1VmlkZW9cQWZmaWNoZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/noemi/Desktop/Commerce électronique/Technologie_Commerce_Electronique/Tp1/Boutique_en_ligne/Boutique_en_ligne/Views/Shared/_Layout.cshtml]
+[C:/Users/pierl/Documents/GitPLD/Technologie_Commerce_Electronique/Tp1/Boutique_en_ligne/Boutique_en_ligne/Views/JeuVideo/Ajouter.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSmV1VmlkZW9cQWpvdXRlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/pierl/Documents/GitPLD/Technologie_Commerce_Electronique/Tp1/Boutique_en_ligne/Boutique_en_ligne/Views/JeuVideo/MiseAJour.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSmV1VmlkZW9cTWlzZUFKb3VyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/pierl/Documents/GitPLD/Technologie_Commerce_Electronique/Tp1/Boutique_en_ligne/Boutique_en_ligne/Views/JeuVideo/Modifier.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSmV1VmlkZW9cTW9kaWZpZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/pierl/Documents/GitPLD/Technologie_Commerce_Electronique/Tp1/Boutique_en_ligne/Boutique_en_ligne/Views/JeuVideo/Recherche.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSmV1VmlkZW9cUmVjaGVyY2hlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/pierl/Documents/GitPLD/Technologie_Commerce_Electronique/Tp1/Boutique_en_ligne/Boutique_en_ligne/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/noemi/Desktop/Commerce électronique/Technologie_Commerce_Electronique/Tp1/Boutique_en_ligne/Boutique_en_ligne/Views/Vendeur/Index.cshtml]
+[C:/Users/pierl/Documents/GitPLD/Technologie_Commerce_Electronique/Tp1/Boutique_en_ligne/Boutique_en_ligne/Views/Vendeur/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmVuZGV1clxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/noemi/Desktop/Commerce électronique/Technologie_Commerce_Electronique/Tp1/Boutique_en_ligne/Boutique_en_ligne/Views/Vendeur/Profil.cshtml]
+[C:/Users/pierl/Documents/GitPLD/Technologie_Commerce_Electronique/Tp1/Boutique_en_ligne/Boutique_en_ligne/Views/Vendeur/Profil.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmVuZGV1clxQcm9maWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/pierl/Documents/GitPLD/Technologie_Commerce_Electronique/Tp1/Boutique_en_ligne/Boutique_en_ligne/Views/Vendeur/Statistiques.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmVuZGV1clxTdGF0aXN0aXF1ZXMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

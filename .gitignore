@@ -10,6 +10,10 @@ obj/
 
 # Fichiers de logs
 *.log
+*.dll
+*.editorconfig
+*.pdb
+*.json
 
 # Fichiers temporaires
 *.tmp

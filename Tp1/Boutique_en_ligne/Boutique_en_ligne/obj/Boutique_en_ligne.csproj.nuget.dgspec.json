@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\noemi\\Desktop\\Commerce électronique\\Technologie_Commerce_Electronique\\Tp1\\Boutique_en_ligne\\Boutique_en_ligne\\Boutique_en_ligne.csproj": {}
+    "C:\\Users\\pierl\\Documents\\GitPLD\\Technologie_Commerce_Electronique\\Tp1\\Boutique_en_ligne\\Boutique_en_ligne\\Boutique_en_ligne.csproj": {}
   },
   "projects": {
-    "C:\\Users\\noemi\\Desktop\\Commerce électronique\\Technologie_Commerce_Electronique\\Tp1\\Boutique_en_ligne\\Boutique_en_ligne\\Boutique_en_ligne.csproj": {
+    "C:\\Users\\pierl\\Documents\\GitPLD\\Technologie_Commerce_Electronique\\Tp1\\Boutique_en_ligne\\Boutique_en_ligne\\Boutique_en_ligne.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\noemi\\Desktop\\Commerce électronique\\Technologie_Commerce_Electronique\\Tp1\\Boutique_en_ligne\\Boutique_en_ligne\\Boutique_en_ligne.csproj",
+        "projectUniqueName": "C:\\Users\\pierl\\Documents\\GitPLD\\Technologie_Commerce_Electronique\\Tp1\\Boutique_en_ligne\\Boutique_en_ligne\\Boutique_en_ligne.csproj",
         "projectName": "Boutique_en_ligne",
-        "projectPath": "C:\\Users\\noemi\\Desktop\\Commerce électronique\\Technologie_Commerce_Electronique\\Tp1\\Boutique_en_ligne\\Boutique_en_ligne\\Boutique_en_ligne.csproj",
-        "packagesPath": "C:\\Users\\noemi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\noemi\\Desktop\\Commerce électronique\\Technologie_Commerce_Electronique\\Tp1\\Boutique_en_ligne\\Boutique_en_ligne\\obj\\",
+        "projectPath": "C:\\Users\\pierl\\Documents\\GitPLD\\Technologie_Commerce_Electronique\\Tp1\\Boutique_en_ligne\\Boutique_en_ligne\\Boutique_en_ligne.csproj",
+        "packagesPath": "C:\\Users\\pierl\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\pierl\\Documents\\GitPLD\\Technologie_Commerce_Electronique\\Tp1\\Boutique_en_ligne\\Boutique_en_ligne\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\noemi\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\pierl\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -67,6 +63,14 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[7.0.15, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[12.0.3, )"
+            },
+            "System.Net.Http.Json": {
+              "target": "Package",
+              "version": "[7.0.0, )"
             }
           },
           "imports": [
@@ -88,7 +92,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
         }
       }
     }
