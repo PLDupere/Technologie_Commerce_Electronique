@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using Newtonsoft.Json;
 
 namespace Boutique_en_ligne.Controllers
 {
@@ -50,9 +51,9 @@ namespace Boutique_en_ligne.Controllers
             return View();
         }
 
-        public IActionResult Afficher(Models.JeuVideo jeu)
+        public IActionResult Afficher(List<Models.JeuVideo> jeuVideoList)
         {
-            return View(jeu);
+            return View(jeuVideoList);
         }
 
         [HttpPost]
@@ -111,6 +112,7 @@ namespace Boutique_en_ligne.Controllers
             return RedirectToAction("Modifier", "JeuVideo");
         }
 
+
         // ***** API *****
 
         private readonly string apiKey = "755e1f2dda34491da4ac33116d2608d0";
@@ -119,14 +121,13 @@ namespace Boutique_en_ligne.Controllers
         [HttpPost]
         public async Task<IActionResult> RechercheAPI(string searchName)
         {
-            Models.JeuVideo jeuVideoToReturn = new Models.JeuVideo();
+            List<Models.JeuVideo> jeuVideoList = new List<Models.JeuVideo>();
 
             string apiUrl = $"{apiUrlBase}?key={apiKey}&search={searchName}";
 
             using (HttpClient client = new HttpClient())
             {
                 HttpResponseMessage response = await client.GetAsync(apiUrl);
-                System.Diagnostics.Debug.WriteLine($"HTTP Status Code: {response.StatusCode}");
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -136,20 +137,39 @@ namespace Boutique_en_ligne.Controllers
 
                     if (json != null && json["results"] != null)
                     {
+                        foreach (var result in json["results"])
+                        {
+                            Models.JeuVideo jeuVideoToReturn = new Models.JeuVideo();
 
-                        var firstResult = json["results"][0];
+                            jeuVideoToReturn.titre = (string)result["name"];
+                            jeuVideoToReturn.annee_sortie = GetValueOrDefault((string)result["released"]);
+                            jeuVideoToReturn.pochette_jeu = GetValueOrDefault((string)result["background_image"]);
 
-                        //good
-                        jeuVideoToReturn.titre = (string)firstResult["name"];
-                        jeuVideoToReturn.annee_sortie = (string)firstResult["released"];
-                        jeuVideoToReturn.pochette_jeu = (string)firstResult["background_image"]; 
-                        jeuVideoToReturn.console = (string)firstResult?["platforms"]?[0]?["platform"]?["name"];
+                            JToken platformsToken = result?["platforms"];
+                            jeuVideoToReturn.console = platformsToken != null && platformsToken.HasValues
+                                ? platformsToken.Select(p => GetValueOrDefault((string)p["platform"]["name"])).ToArray()
+                                : new string[0];
 
-                        jeuVideoToReturn.genre = (string)firstResult?["tags"]?[0]?["name"];
-                        jeuVideoToReturn.editeur = (string)firstResult["stores"]?[0]?["store"]?["name"];
-                        jeuVideoToReturn.capture_ecran = (string)firstResult["short_screenshots"]?[0]?["image"];
+                            JToken tagsToken = result?["tags"];
+                            jeuVideoToReturn.genre = tagsToken != null && tagsToken.HasValues
+                                ? tagsToken.Select(t => GetValueOrDefault((string)t["name"])).ToArray()
+                                : new string[0];
 
-                        return RedirectToAction("Afficher", "JeuVideo", jeuVideoToReturn);
+                            JToken storesToken = result?["stores"];
+                            jeuVideoToReturn.editeur = storesToken != null && storesToken.HasValues
+                                ? storesToken.Select(s => GetValueOrDefault((string)s["name"])).ToArray()
+                                : new string[0];
+
+                            JToken screenshotsToken = result["short_screenshots"];
+                            jeuVideoToReturn.capture_ecran = screenshotsToken != null && screenshotsToken.HasValues
+                                ? screenshotsToken.Select(s => GetValueOrDefault((string)s["image"])).ToArray()
+                                : new string[0];
+
+                            jeuVideoList.Add(jeuVideoToReturn);
+                        }
+
+                        return RedirectToAction("Afficher", new { Capacity = 5, Count = jeuVideoList.Count, jeuVideoList });
+                        //return RedirectToAction("Afficher", new { Capacity = 5, Count = jeuVideoList.Count, jeuVideoListJson = JsonConvert.SerializeObject(jeuVideoList) });
                     }
                     else
                     {
@@ -161,6 +181,10 @@ namespace Boutique_en_ligne.Controllers
                     return RedirectToAction("Recherche", "JeuVideo");
                 }
             }
+        }
+        private string GetValueOrDefault(string value, string defaultValue = "S/O")
+        {
+            return string.IsNullOrEmpty(value) ? defaultValue : value;
         }
     }
 }
