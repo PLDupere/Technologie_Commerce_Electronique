@@ -10,6 +10,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 using Newtonsoft.Json;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
+
 namespace Boutique_en_ligne.Controllers
 {
     public class JeuVideoController : Controller
@@ -21,17 +22,12 @@ namespace Boutique_en_ligne.Controllers
         {
             _dbContext = dbContext;
         }
-        /*
-        public IActionResult Ajouter()
-        {
-            return View();
-        }*/
 
-        public IActionResult AjouterAPI(Models.Afficher jeu)
+        public IActionResult AjouterAPI(Models.JeuVideo jeu)
         {
             Models.JeuVideo jeuVideo = new Models.JeuVideo();
 
-            jeuVideo.titre = "yoyoyo";
+            jeuVideo.titre = jeu.titre;
             jeuVideo.annee_sortie = jeu.annee_sortie;
             jeuVideo.console = jeu.console.ToString();
             jeuVideo.editeur = jeu.editeur.ToString();
