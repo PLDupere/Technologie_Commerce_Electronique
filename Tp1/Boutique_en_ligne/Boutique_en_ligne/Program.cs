@@ -94,6 +94,12 @@ app.UseMvc(routes =>
      template: "JeuVideo/Afficher",
      defaults: new { controller = "JeuVideo", action = "Afficher" }
      );
+
+    routes.MapRoute(
+     name: "AjouterAPI",
+     template: "JeuVideo/AjouterAPI",
+     defaults: new { controller = "JeuVideo", action = "AjouterAPI" }
+     );
 });
 
 

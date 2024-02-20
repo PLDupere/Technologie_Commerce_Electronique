@@ -1,78 +1,83 @@
 ﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-@model List<Boutique_en_ligne.Models.JeuVideo>
+@model List<Boutique_en_ligne.Models.Afficher>
 
 @{
     Layout = "_Layout";
 }
-<p>Total games: @Model.Count</p>
 
 @foreach (var jeu in Model)
 {
-    <div class="card">
-        <img src="@jeu.pochette_jeu" class="card-img-top" alt="Pochette du jeu">
-        <div class="card-body">
-            <h5 class="card-title">@jeu.titre</h5>
-            <p class="card-text">
-                <strong>Année de sortie:</strong> @jeu.annee_sortie<br>
-                <strong>Console du jeu:</strong>
-                @if (jeu.console != null)
-                {
-                    <ul>
-                        @foreach (var console in jeu.console)
-                        {
-                            <li>@console</li>
-                        }
-                    </ul>
-                }
-                <strong>Genre:</strong>
-                @if (jeu.genre != null)
-                {
-                    <ul>
-                        @foreach (var genre in jeu.genre)
-                        {
-                            <li>@genre</li>
-                        }
-                    </ul>
-                }
-                <strong>Éditeur:</strong>
-                @if (jeu.editeur != null)
-                {
-                    <ul>
-                        @foreach (var editeur in jeu.editeur)
-                        {
-                            <li>@editeur</li>
-                        }
-                    </ul>
-                }
-                <div class="form-group mb-4">
-                    <label for="prix_vente">Prix de vente:</label>
-                    <input type="number" class="form-control" id="prix_vente" name="prix_vente" required>
-                </div>
-            </p>
-        </div>
-        <div>
-            <strong>Capture d'écran:</strong>
-            @if (jeu.capture_ecran != null)
-            {
-                <ul>
-                    @foreach (var capture in jeu.capture_ecran)
+    <form id="AjouterJeuForm_@jeu.titre" asp-action="AjouterAPI" asp-controller="JeuVideo" method="POST">
+        <div class="card">
+            <img src="@jeu.pochette_jeu" class="card-img-top" alt="Pochette du jeu">
+            <div class="card-body">
+                <h5 class="card-title">@jeu.titre</h5>
+                <p class="card-text">
+                    <strong>Année de sortie:</strong> @jeu.annee_sortie<br>
+                    <strong>Console du jeu:</strong>
+                    @if (jeu.console != null && jeu.console.Any())
                     {
-                        <li><img src="@capture" alt="Capture d'écran"></li>
+                        <ul>
+                            @foreach (var console in jeu.console)
+                            {
+                                <li>@console</li>
+                            }
+                        </ul>
                     }
-                </ul>
-            }
-        </div>
-        <form id="AjouterJeuFormAutomatic" asp-action="AddJeuVideo" asp-controller="JeuVideo" method="POST">
-            <div class="form-group text-center mt-4">
-                <button type="submit" class="btn btn-primary">Ajouter le jeu</button>
+                    <strong>Genre:</strong>
+                    @if (jeu.genre != null && jeu.genre.Any())
+                    {
+                        <ul>
+                            @foreach (var genre in jeu.genre)
+                            {
+                                <li>@genre</li>
+                            }
+                        </ul>
+                    }
+                    <strong>Éditeur:</strong>
+                    @if (jeu.editeur != null && jeu.editeur.Any())
+                    {
+                        <ul>
+                            @foreach (var editeur in jeu.editeur)
+                            {
+                                <li>@editeur</li>
+                            }
+                        </ul>
+                    }
+                    <div class="form-group mb-4">
+                        <label for="prix_vente">Prix de vente:</label>
+                        <input type="number" class="form-control" id="prix_vente" name="prix_vente" required>
+                    </div>
+                </p>
             </div>
-        </form>
-    </div>
+            <div>
+                <strong>Capture d'écran:</strong>
+                @if (jeu.capture_ecran != null && jeu.capture_ecran.Any())
+                {
+                    <ul>
+                        @foreach (var capture in jeu.capture_ecran)
+                        {
+                            <li><img src="@capture" alt="Capture d'écran"></li>
+                        }
+                    </ul>
+                }
+            </div>
+       
+                <div class="form-group text-center mt-4">
+                    <button type="submit" class="btn btn-primary">Ajouter le jeu</button>
+                </div>
+       
+                <br>
+                <hr>
+                <hr>
+                <br>
+        </div>
+     </form>
 }
 
 <style>
     .img {
-        max-width: 50%;
+        max-width: 200px;
         height: auto;
         margin-top: 10px;
     }

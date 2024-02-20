@@ -2,11 +2,26 @@
 {
     using Microsoft.Extensions.DependencyInjection;
 
-    public class Startup
+    namespace Boutique_en_ligne
     {
-        public void ConfigureServices(IServiceCollection services)
+        public class Startup
         {
-            services.AddHttpClient();
+            public void ConfigureServices(IServiceCollection services)
+            {
+                ConfigureHttpClient(services);
+                ConfigureMvc(services);
+            }
+
+            private void ConfigureHttpClient(IServiceCollection services)
+            {
+                services.AddHttpClient();
+            }
+
+            private void ConfigureMvc(IServiceCollection services)
+            {
+                services.AddControllersWithViews();
+            }
         }
     }
+
 }

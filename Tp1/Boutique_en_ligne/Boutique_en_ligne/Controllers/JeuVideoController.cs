@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using Newtonsoft.Json;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Boutique_en_ligne.Controllers
 {
@@ -15,17 +16,35 @@ namespace Boutique_en_ligne.Controllers
     {
         private readonly BoutiqueJeuDbContext _dbContext;
 
-        //private readonly IHttpClientFactory _clientFactory;  //Install-Package System.Net.Http.Json -Version 7.0.0
-
 
         public JeuVideoController(BoutiqueJeuDbContext dbContext)
         {
             _dbContext = dbContext;
-            //_clientFactory = clientFactory;
         }
+        /*
         public IActionResult Ajouter()
         {
             return View();
+        }*/
+
+        public IActionResult AjouterAPI(Models.Afficher jeu)
+        {
+            Models.JeuVideo jeuVideo = new Models.JeuVideo();
+
+            jeuVideo.titre = "yoyoyo";
+            jeuVideo.annee_sortie = jeu.annee_sortie;
+            jeuVideo.console = jeu.console.ToString();
+            jeuVideo.editeur = jeu.editeur.ToString();
+            jeuVideo.genre = jeu.genre.ToString();
+            jeuVideo.pochette_jeu = jeu.pochette_jeu;
+            jeuVideo.capture_ecran = jeu.capture_ecran.ToString();
+            jeuVideo.prix_vente = jeu.prix_vente;
+
+
+            _dbContext.JeuVideos.Add(jeuVideo);
+            _dbContext.SaveChanges();
+
+            return RedirectToAction("Modifier", "JeuVideo");
         }
 
         public IActionResult Modifier()
@@ -50,10 +69,19 @@ namespace Boutique_en_ligne.Controllers
         {
             return View();
         }
-
-        public IActionResult Afficher(List<Models.JeuVideo> jeuVideoList)
+        
+        [HttpGet]
+        public IActionResult Afficher()
         {
-            return View(jeuVideoList);
+            if (TempData.TryGetValue("JeuVideoListJson", out object jeuVideoListJsonObj) && jeuVideoListJsonObj is string jeuVideoListJson)
+            {
+                List<Models.Afficher> jeuVideoList = JsonConvert.DeserializeObject<List<Models.Afficher>>(jeuVideoListJson);
+                return View(jeuVideoList);
+            }
+            else
+            {
+                return RedirectToAction("Recherche", "JeuVideo");
+            }
         }
 
         [HttpPost]
@@ -121,7 +149,7 @@ namespace Boutique_en_ligne.Controllers
         [HttpPost]
         public async Task<IActionResult> RechercheAPI(string searchName)
         {
-            List<Models.JeuVideo> jeuVideoList = new List<Models.JeuVideo>();
+            List<Models.Afficher> jeuVideoList = new List<Models.Afficher>();
 
             string apiUrl = $"{apiUrlBase}?key={apiKey}&search={searchName}";
 
@@ -139,7 +167,7 @@ namespace Boutique_en_ligne.Controllers
                     {
                         foreach (var result in json["results"])
                         {
-                            Models.JeuVideo jeuVideoToReturn = new Models.JeuVideo();
+                            Models.Afficher jeuVideoToReturn = new Models.Afficher();
 
                             jeuVideoToReturn.titre = (string)result["name"];
                             jeuVideoToReturn.annee_sortie = GetValueOrDefault((string)result["released"]);
@@ -167,9 +195,9 @@ namespace Boutique_en_ligne.Controllers
 
                             jeuVideoList.Add(jeuVideoToReturn);
                         }
-
-                        return RedirectToAction("Afficher", new { Capacity = 5, Count = jeuVideoList.Count, jeuVideoList });
-                        //return RedirectToAction("Afficher", new { Capacity = 5, Count = jeuVideoList.Count, jeuVideoListJson = JsonConvert.SerializeObject(jeuVideoList) });
+                        string jeuVideoListJson = JsonConvert.SerializeObject(jeuVideoList);
+                        TempData["JeuVideoListJson"] = jeuVideoListJson;
+                        return RedirectToAction("Afficher", "JeuVideo");
                     }
                     else
                     {
