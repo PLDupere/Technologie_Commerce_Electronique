@@ -66,7 +66,9 @@
                     <ul>
                         @foreach (var capture in jeu.capture_ecran)
                         {
-                            <li><img src="@capture" alt="Capture d'écran"></li>
+                            <li>
+                                <img src="@capture" alt="Capture d'écran">
+                            </li>
                             captureInput += capture + " | ";
                         }
                     </ul>
@@ -94,10 +96,9 @@
 }
 
 <style>
-    .img {
-        max-width: 200px;
-        max-height: 200px;
+    img {
+        width: 500px;
+        height: 300px;
         margin-top: 10px;
-        display: block
     }
 </style>

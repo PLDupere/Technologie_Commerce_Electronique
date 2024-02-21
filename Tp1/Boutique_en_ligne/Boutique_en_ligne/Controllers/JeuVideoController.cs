@@ -118,9 +118,21 @@ namespace Boutique_en_ligne.Controllers
         [HttpPost]
         public IActionResult UpdateJeuVideo(int Id, Models.JeuVideo jeuVideoToUpdate)
         {
-            Models.JeuVideo jeuVideo = _dbContext.JeuVideos.Where(j => j.Id == Id).First();
-            jeuVideo = jeuVideoToUpdate;
-            _dbContext.SaveChanges();
+            Models.JeuVideo jeuVideo = _dbContext.JeuVideos.FirstOrDefault(j => j.Id == Id);
+
+            if (jeuVideo != null)
+            {
+                jeuVideo.titre = jeuVideoToUpdate.titre;
+                jeuVideo.annee_sortie = jeuVideoToUpdate.annee_sortie;
+                jeuVideo.console = jeuVideoToUpdate.console;
+                jeuVideo.genre = jeuVideoToUpdate.genre;
+                jeuVideo.editeur = jeuVideoToUpdate.editeur;
+                jeuVideo.pochette_jeu = jeuVideoToUpdate.pochette_jeu;
+                jeuVideo.capture_ecran = jeuVideoToUpdate.capture_ecran;
+                jeuVideo.prix_vente = jeuVideoToUpdate.prix_vente;
+
+                _dbContext.SaveChanges();
+            }
 
             return RedirectToAction("Modifier", "JeuVideo");
         }
