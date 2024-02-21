@@ -35,7 +35,7 @@
                     <td>@jeu.console</td>
                     <td>@jeu.genre</td>
                     <td>@jeu.editeur</td>
-                    <td><img src="@jeu.pochette_jeu" alt="Pochette du Jeu" style="max-width: 100px; max-height: 100px;" /></td>
+                    <td><img src="@jeu.pochette_jeu" alt=" " style="max-width: 100px; max-height: 100px;" /></td>
                     <td>
                         @if (!string.IsNullOrEmpty(jeu.capture_ecran))
                         {
@@ -43,7 +43,7 @@
 
                             foreach (var captureImage in captures)
                             {
-                                <img src="@captureImage" alt="" style="max-width: 100px; max-height: 100px; margin-right: 5px; display: block;" />
+                                <img src="@captureImage" alt=" " style="max-width: 100px; max-height: 100px; margin-right: 5px; display: block;" />
                             }
                         }
                     </td>

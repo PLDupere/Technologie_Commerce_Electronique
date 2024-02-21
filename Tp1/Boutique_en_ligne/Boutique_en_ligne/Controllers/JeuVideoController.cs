@@ -119,8 +119,6 @@ namespace Boutique_en_ligne.Controllers
         public IActionResult UpdateJeuVideo(int Id, Models.JeuVideo jeuVideoToUpdate)
         {
             Models.JeuVideo jeuVideo = _dbContext.JeuVideos.Where(j => j.Id == Id).First();
-            Debug.WriteLine($"Before Update - Id: {jeuVideo.Id}");
-            Debug.WriteLine($"IDDDD {Id}");
             jeuVideo = jeuVideoToUpdate;
             _dbContext.SaveChanges();
 

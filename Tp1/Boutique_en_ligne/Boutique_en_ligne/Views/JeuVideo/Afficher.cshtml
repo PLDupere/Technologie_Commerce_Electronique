@@ -49,7 +49,7 @@
                             @foreach (var editeur in jeu.editeur)
                             {
                                 <li>@editeur</li>
-                                editeurInput += editeur + " | ";
+                                editeurInput = editeur;
                             }
                         </ul>
                     }
@@ -96,7 +96,8 @@
 <style>
     .img {
         max-width: 200px;
-        height: auto;
+        max-height: 200px;
         margin-top: 10px;
+        display: block
     }
 </style>
