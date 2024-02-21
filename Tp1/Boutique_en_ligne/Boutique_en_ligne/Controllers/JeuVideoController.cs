@@ -29,11 +29,11 @@ namespace Boutique_en_ligne.Controllers
 
             jeuVideo.titre = jeu.titre;
             jeuVideo.annee_sortie = jeu.annee_sortie;
-            jeuVideo.console = jeu.console.ToString();
-            jeuVideo.editeur = jeu.editeur.ToString();
-            jeuVideo.genre = jeu.genre.ToString();
+            jeuVideo.console = jeu.console?.ToString();
+            jeuVideo.editeur = jeu.editeur?.ToString();
+            jeuVideo.genre = jeu.genre?.ToString();
             jeuVideo.pochette_jeu = jeu.pochette_jeu;
-            jeuVideo.capture_ecran = jeu.capture_ecran.ToString();
+            jeuVideo.capture_ecran = jeu.capture_ecran?.ToString();
             jeuVideo.prix_vente = jeu.prix_vente;
 
 
@@ -41,6 +41,11 @@ namespace Boutique_en_ligne.Controllers
             _dbContext.SaveChanges();
 
             return RedirectToAction("Modifier", "JeuVideo");
+        }
+
+        public IActionResult Ajouter()
+        {
+            return View();
         }
 
         public IActionResult Modifier()
@@ -147,12 +152,12 @@ namespace Boutique_en_ligne.Controllers
         {
             List<Models.Afficher> jeuVideoList = new List<Models.Afficher>();
 
-            string apiUrl = $"{apiUrlBase}?key={apiKey}&search={searchName}";
+            string apiUrl = $"{apiUrlBase}?key={apiKey}&search={searchName}&page_size=10";
 
             using (HttpClient client = new HttpClient())
             {
                 HttpResponseMessage response = await client.GetAsync(apiUrl);
-
+                //HTTP request-response cycle where the server is indicating that the request header fields are too large (status code 431). 
                 if (response.IsSuccessStatusCode)
                 {
                     string jsonResponse = await response.Content.ReadAsStringAsync();
@@ -165,7 +170,7 @@ namespace Boutique_en_ligne.Controllers
                         {
                             Models.Afficher jeuVideoToReturn = new Models.Afficher();
 
-                            jeuVideoToReturn.titre = (string)result["name"];
+                            jeuVideoToReturn.titre = GetValueOrDefault((string)result["name"]);
                             jeuVideoToReturn.annee_sortie = GetValueOrDefault((string)result["released"]);
                             jeuVideoToReturn.pochette_jeu = GetValueOrDefault((string)result["background_image"]);
 
@@ -181,7 +186,7 @@ namespace Boutique_en_ligne.Controllers
 
                             JToken storesToken = result?["stores"];
                             jeuVideoToReturn.editeur = storesToken != null && storesToken.HasValues
-                                ? storesToken.Select(s => GetValueOrDefault((string)s["name"])).ToArray()
+                                ? storesToken.Select(s => GetValueOrDefault((string)s["store"]["name"])).ToArray()
                                 : new string[0];
 
                             JToken screenshotsToken = result["short_screenshots"];

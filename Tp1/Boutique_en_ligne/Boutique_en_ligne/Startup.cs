@@ -6,7 +6,7 @@
     {
         public class Startup
         {
-            public void ConfigureServices(IServiceCollection services)
+/*            public void ConfigureServices(IServiceCollection services)
             {
                 ConfigureHttpClient(services);
                 ConfigureMvc(services);
@@ -20,7 +20,7 @@
             private void ConfigureMvc(IServiceCollection services)
             {
                 services.AddControllersWithViews();
-            }
+            }*/
         }
     }
 
