@@ -57,7 +57,7 @@ namespace Boutique_en_ligne.Controllers
                     }
                     else if (utilisateurConnecte.profil == "Vendeur")
                     {
-                        return RedirectToAction("Index", "Vendeur");
+                        return RedirectToAction("Recherche", "JeuVideo");
                     }
                 }
           

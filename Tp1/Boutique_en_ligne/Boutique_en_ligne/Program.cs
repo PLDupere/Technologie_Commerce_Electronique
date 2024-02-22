@@ -61,6 +61,18 @@ app.UseMvc(routes =>
      );
 
     routes.MapRoute(
+    name: "StatistiquesClient",
+    template: "CLient/Statistiques",
+    defaults: new { controller = "Client", action = "Statistiques" }
+    );
+
+    routes.MapRoute(
+    name: "StatistiquesVendeur",
+    template: "Vendeur/Statistiques",
+    defaults: new { controller = "Vendeur", action = "Statistiques" }
+    );
+
+    routes.MapRoute(
      name: "AccueilVendeur",
      template: "Vendeur/Index",
      defaults: new { controller = "Vendeur", action = "Index" }
@@ -102,6 +114,12 @@ app.UseMvc(routes =>
      name: "RecherhceAPI",
      template: "JeuVideo/Recherche",
      defaults: new { controller = "JeuVideo", action = "Recherche" }
+     );
+
+    routes.MapRoute(
+     name: "Afficher",
+     template: "JeuVideo/Afficher",
+     defaults: new { controller = "JeuVideo", action = "Afficher" }
      );
 
 });

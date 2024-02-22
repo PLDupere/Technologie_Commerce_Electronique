@@ -34,7 +34,18 @@
                         <td>@jeu.editeur</td>
                         <td>@jeu.prix_vente</td>
                         <td><img src="@jeu.pochette_jeu" alt="Pochette du jeu" /></td>
-                        <td><img src="@jeu.capture_ecran" alt="Capture d'écran" /></td>
+                        <td>
+                            @if (!string.IsNullOrEmpty(jeu.capture_ecran))
+                            {
+                                var captures = jeu.capture_ecran.Split('|').Take(4).ToArray(); 
+
+                                foreach (var captureImage in captures)
+                                {
+                                    <img src="@captureImage" alt=" " style="max-width: 100px; max-height: 100px; margin-right: 5px; display: block;" />
+                                }
+                            }
+                        </td>
+
                         <td>
                             <form asp-controller="Client" asp-action="AjouterAuPanier" method="get">
                                 <input type="hidden" name="id" value="@jeu.Id" />

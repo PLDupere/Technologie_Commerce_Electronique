@@ -18,6 +18,7 @@ namespace Boutique_en_ligne
         public DbSet<Models.Panier> Paniers { get; set; }
 
 
+     
         protected override void OnConfiguring(DbContextOptionsBuilder dbContextOptionsBuilder)
         {
             string connection_string = "Data Source = (localdb)\\MSSQLLocalDB; Initial Catalog = master; Integrated Security = True; Connect Timeout = 30; Encrypt = False; Trust Server Certificate = False; Application Intent = ReadWrite; Multi Subnet Failover = False";

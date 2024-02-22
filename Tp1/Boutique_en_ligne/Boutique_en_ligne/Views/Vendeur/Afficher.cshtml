@@ -1,0 +1,77 @@
+﻿@model List<Boutique_en_ligne.Models.JeuVideo>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "_Layout";
+    var capture = "";
+
+}
+@if (Model != null && Model.Any())
+{
+<div class="container mt-5">
+    <h2>État de vos jeux vidéo</h2>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titre</th>
+                <th>Année de sortie</th>
+                <th>Console</th>
+                <th>Genre</th>
+                <th>Editeur</th>
+                <th>Pochette du Jeu</th>
+                <th>Capture d'écran</th>
+                <th>Prix de vente</th>
+                <th>Disponibilité</th>
+                <th>Nom et prénom du client</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var jeu in Model)
+            {
+                <tr>
+                    <td>@jeu.Id</td>
+                    <td>@jeu.titre</td>
+                    <td>@jeu.annee_sortie</td>
+                    <td>@jeu.console</td>
+                    <td>@jeu.genre</td>
+                    <td>@jeu.editeur</td>
+                    <td><img src="@jeu.pochette_jeu" alt=" " style="max-width: 100px; max-height: 100px;" /></td>
+                    <td>
+                        @if (!string.IsNullOrEmpty(jeu.capture_ecran))
+                        {
+                            var captures = jeu.capture_ecran.Split('|').ToArray();
+
+                            foreach (var captureImage in captures)
+                            {
+                                <img src="@captureImage" alt=" " style="max-width: 100px; max-height: 100px; margin-right: 5px; display: block;" />
+                            }
+                        }
+                    </td>
+                    <td>@jeu.prix_vente</td>
+                    <td>@(jeu.EstVendu ? "Vendu" : "Disponible")</td>
+                    <td>@(jeu.Facture?.Utilisateur?.prenom + " " + jeu.Facture?.Utilisateur?.nom ?? "N/A")</td>
+
+                    <td>
+
+                        <form asp-action="MiseAJour" asp-controller="JeuVideo" asp-route-id="@jeu.Id" method="post">
+                            <input type="submit" value="Modifier" class="btn btn-primary" />
+                        </form>
+
+                        <form asp-action="DeleteJeuVideo" asp-controller="JeuVideo" asp-route-id="@jeu.Id" method="post">
+                            <input type="submit" value="Supprimer" class="btn btn-danger" />
+                        </form>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+}
+else
+{
+    <p>Vous n'avez mis à vendre aucun jeux vidéo'.</p>
+}
+
+

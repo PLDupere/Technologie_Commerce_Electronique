@@ -2,4 +2,38 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+    Layout = "_Layout";
 }
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Statistiques</h2>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Nombre d'articles achetés</h5>
+                    <p class="card-text">@ViewBag.NombreArticlesAchetes</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Montant total dépensé</h5>
+                    <p class="card-text">@ViewBag.MontantTotalDepense</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Nombre de factures</h5>
+                    <p class="card-text">@ViewBag.NombreFactures</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

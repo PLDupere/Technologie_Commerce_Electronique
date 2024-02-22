@@ -2,19 +2,38 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+    Layout = "_Layout";
 }
 
-<h1>Page statistique</h1>
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Statistiques</h2>
 
-<!-- Montant des ventes -->
-<h2>Montant des ventes</h2>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Montant total des ventes</h5>
+                    <p class="card-text">@ViewBag.MontantTotalVentes</p>
+                </div>
+            </div>
+        </div>
 
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Nombre de jeux vendus</h5>
+                    <p class="card-text">@ViewBag.NombreTotalJeuxVendus</p>
+                </div>
+            </div>
+        </div>
 
-<!-- Statistiques -->
-<h2>Statistiques</h2>
-
-<!-- Liste des jeux vendus -->
-<h2>Jeux vendus</h2>
-<ul id="soldGamesList">
-    <!-- Utilisez JavaScript pour afficher la liste des jeux vendus -->
-</ul>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Nombre de clients ayant acheté vos jeux</h5>
+                    <p class="card-text">@ViewBag.NombreClientsAchetantJeux</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

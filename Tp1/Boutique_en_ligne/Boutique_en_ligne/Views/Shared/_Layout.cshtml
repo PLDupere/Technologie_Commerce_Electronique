@@ -18,6 +18,14 @@
     
     <link rel="stylesheet" href="~/lib/twitter-bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="~/lib/bootstrap-icons/font/bootstrap-icons.css">
+    <style>
+        img {
+            width: 100px;
+            height: 100px;
+            margin-top: 10px;
+            display: block
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -32,11 +40,11 @@
                     }
                     else if (userProfil == "Vendeur")
                     {
-                        boutiqueUrl = "/Vendeur/Index";
+                        boutiqueUrl = "/JeuVideo/Recherche";
                     }
                 }
             }
-            <a class="navbar-brand col-2" href="@boutiqueUrl">Nom Boutique</a>
+            <a class="navbar-brand col-2" href="@boutiqueUrl"><i class="bi bi-joystick text-white mr-2"></i>  GameShop</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -63,7 +71,7 @@
                             <button class="btn btn-outline-light mx-2" onclick="location.href='/Client/Profil'"><i class="bi bi-person"></i> Profil</button>
                         </li>
                         <li class="nav-item">
-                            <button class="btn btn-outline-light mx-2" onclick="location.href='/Statistiques/Index'"><i class="bi bi-graph-up"></i> Statistiques</button>
+                            <button class="btn btn-outline-light mx-2" onclick="location.href='/Client/Statistiques'"><i class="bi bi-graph-up"></i> Statistiques</button>
                         </li>
                         <li class="nav-item">
                             <button class="btn btn-outline-light mx-2" onclick="location.href='/Client/CarteCredit'"><i class="bi bi-cash"></i> Solde</button>
@@ -75,10 +83,10 @@
                             <button class="btn btn-outline-light mx-2" onclick="location.href='/Vendeur/Profil'"><i class="bi bi-person"></i> Profil</button>
                         </li>
                         <li class="nav-item">
-                            <button class="btn btn-outline-light mx-2" onclick="location.href='/ArticlesDisponibles/Index'"><i class="bi bi-archive"></i> Articles Disponibles</button>
+                            <button class="btn btn-outline-light mx-2" onclick="location.href='/Vendeur/Afficher'"><i class="bi bi-archive"></i> Articles Disponibles</button>
                         </li>
                         <li class="nav-item">
-                            <button class="btn btn-outline-light mx-2" onclick="location.href='/Statistiques/Index'"><i class="bi bi-graph-up"></i> Statistiques</button>
+                            <button class="btn btn-outline-light mx-2" onclick="location.href='/Vendeur/Statistiques'"><i class="bi bi-graph-up"></i> Statistiques</button>
                         </li>
                     }
                 </ul>

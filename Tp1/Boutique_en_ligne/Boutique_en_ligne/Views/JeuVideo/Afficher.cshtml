@@ -1,0 +1,104 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model List<Boutique_en_ligne.Models.Afficher>
+
+@{
+    Layout = "_Layout";
+    var index = 0;
+    var genreInput = "";
+    var captureInput = "";
+    var consoleInput = "";
+    var editeurInput = "";
+}
+
+@foreach (var jeu in Model)
+{
+    index = index + 1;
+    <form id="APIJeuForm_@index" asp-action="AjouterAPI" asp-controller="JeuVideo" method="POST">
+        <div class="card">
+            <img src="@jeu.pochette_jeu" class="card-img-top" alt="Pochette du jeu">
+            <div class="card-body">
+                <h5 class="card-title">@jeu.titre</h5>
+                <p class="card-text">
+                    <strong>Année de sortie:</strong> @jeu.annee_sortie<br>
+                    <strong>Console du jeu:</strong>
+                    @if (jeu.console != null && jeu.console.Any())
+                    {
+                        <ul>
+                            @foreach (var console in jeu.console)
+                            {
+                                <li>@console</li>
+                                consoleInput += console + " | ";
+                            }
+                        </ul>
+                    }
+                    <strong>Genre:</strong>
+                    @if (jeu.genre != null && jeu.genre.Any())
+                    {
+                        <ul>
+                            @foreach (var genre in jeu.genre)
+                            {
+                                <li>@genre</li>
+                                genreInput += genre + " | ";
+                            }
+                        </ul>
+                    }
+                    <strong>Éditeur:</strong>
+                    @if (jeu.editeur != null && jeu.editeur.Any())
+                    {
+                        <ul>
+                            @foreach (var editeur in jeu.editeur)
+                            {
+                                <li>@editeur</li>
+                                editeurInput = editeur;
+                            }
+                        </ul>
+                    }
+                    <div class="form-group mb-4">
+                        <label for="prix_vente">Prix de vente:</label>
+                        <input class="form-control" id="prix_vente" name="prix_vente" required>
+                    </div>
+                </p>
+            </div>
+            <div>
+                <strong>Capture d'écran:</strong>
+                @if (jeu.capture_ecran != null && jeu.capture_ecran.Any())
+                {
+                    <ul>
+                        @for (int i = 0; i < Math.Min(4, jeu.capture_ecran.Length); i++)
+                        {
+                            <li>
+                                <img src="@jeu.capture_ecran[i]" alt="Capture d'écran">
+                            </li>
+                        }
+                    </ul>
+                }
+            </div>
+
+
+
+            <input type="hidden" id="titre" name="titre" value="@jeu.titre" />
+            <input type="hidden" id="annee_sortie" name="annee_sortie" value="@jeu.annee_sortie" />
+            <input type="hidden" id="pochette_jeu" name="pochette_jeu" value="@jeu.pochette_jeu" />
+            <input type="hidden" id="console" name="console" value="@consoleInput" />
+            <input type="hidden" id="genre" name="genre" value="@genreInput" />
+            <input type="hidden" id="capture_ecran" name="capture_ecran" value="@captureInput" />
+            <input type="hidden" id="editeur" name="editeur" value="@editeurInput" />
+
+            <div class="form-group text-center mt-4">
+                <button type="submit" class="btn btn-primary">Ajouter le jeu</button>
+            </div>
+
+            <br>
+        
+            <br>
+        </div>
+    </form>
+}
+
+<style>
+    img {
+        width: 500px;
+        height: 300px;
+        margin-top: 10px;
+    }
+</style>

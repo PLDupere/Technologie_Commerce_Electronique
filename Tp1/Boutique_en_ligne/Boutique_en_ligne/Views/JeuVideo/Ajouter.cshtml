@@ -1,5 +1,4 @@
-﻿
-@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @model Boutique_en_ligne.Models.JeuVideo
 
 @{
@@ -50,14 +49,14 @@
                         <div class="form-group mb-4">
                             <label for="capture_ecran">Captures d'écran:</label>
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="capture_ecran" asp-for="capture_ecran" name="capture_ecran" >
+                                <input type="file" class="custom-file-input" id="capture_ecran" asp-for="capture_ecran" name="capture_ecran">
                                 <label class="custom-file-label" for="capture_ecran"></label>
                             </div>
                         </div>
 
                         <div class="form-group mb-4">
                             <label for="prix_vente">Prix de vente:</label>
-                            <input type="number" class="form-control" id="prix_vente" asp-for="prix_vente" name="prix_vente" required>
+                            <input class="form-control" id="prix_vente" asp-for="prix_vente" name="prix_vente" required>
                         </div>
 
                         <div class="form-group text-center mt-4">
@@ -69,4 +68,3 @@
         </div>
     </div>
 </div>
-

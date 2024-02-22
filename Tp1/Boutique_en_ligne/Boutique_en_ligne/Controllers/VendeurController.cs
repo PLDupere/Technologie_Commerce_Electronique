@@ -1,7 +1,7 @@
 ﻿using Boutique_en_ligne.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-
+using Newtonsoft.Json;
 
 namespace Boutique_en_ligne.Controllers
 {
@@ -41,6 +41,36 @@ namespace Boutique_en_ligne.Controllers
                 }
             }
             return RedirectToAction("Authentification", "Home");
+        }
+
+        public IActionResult Statistiques()
+        {
+            var vendeurId = HttpContext.Session.GetString("UserId");
+            int vendeurIdInt = int.Parse(vendeurId);
+
+            // Calculer le montant total des ventes pour le vendeur connecté
+            float montantTotalVentesVendeur = (float)_dbContext.Factures
+                .Where(f => f.JeuxVideos.Any(j => j.vendeurId == vendeurIdInt))
+                .Sum(f => f.montant_total);
+
+            // Nombre total de jeux vendus par le vendeur
+            int nombreTotalJeuxVendus = _dbContext.Factures
+                .Where(f => f.JeuxVideos.Any(j => j.vendeurId == vendeurIdInt))
+                .SelectMany(f => f.JeuxVideos)
+                .Count();
+
+            // Nombre de clients ayant acheté les jeux du vendeur
+            int nombreClientsAchetantJeuxVendeur = _dbContext.JeuVideos
+                .Where(j => j.vendeurId == vendeurIdInt)
+                .SelectMany(j => j.Facture.JeuxVideos.Select(fj => fj.Utilisateur.Id))
+                .Distinct()
+                .Count();
+
+            ViewBag.MontantTotalVentes = montantTotalVentesVendeur;
+            ViewBag.NombreTotalJeuxVendus = nombreTotalJeuxVendus;
+            ViewBag.NombreClientsAchetantJeux = nombreClientsAchetantJeuxVendeur;
+
+            return View();
         }
 
         // Inscription d'un vendeur
@@ -94,6 +124,18 @@ namespace Boutique_en_ligne.Controllers
             }
             return RedirectToAction("Index", "Vendeur");
         }
+
+        public IActionResult Afficher()
+        {
+           
+            var vendeurId = HttpContext.Session.GetString("UserId");
+            
+            // Récupérer les jeux vidéos du vendeur connecté
+            List<Models.JeuVideo> jeuVideos = this._dbContext.JeuVideos.Where(j => j.vendeurId == int.Parse(vendeurId)).ToList();
+            return View(jeuVideos);
+        }
+
+
 
         [HttpDelete]
         public IActionResult DeleteVendeur(int vendeurId)

@@ -10,11 +10,10 @@ namespace Boutique_en_ligne.Models
         public DateTime? date_achat { get; set; }
 
 
-        //many to one client
-        public int ClientId { get; set; }
+        public int UtilisateurId { get; set; }
 
-        [ForeignKey("ClientId")]
-        public Client Client { get; set; }
+        [ForeignKey("UtilisateurId")]
+        public Utilisateur Utilisateur { get; set; }
 
 
         public ICollection<JeuVideo>? JeuxVideos { get; set; }

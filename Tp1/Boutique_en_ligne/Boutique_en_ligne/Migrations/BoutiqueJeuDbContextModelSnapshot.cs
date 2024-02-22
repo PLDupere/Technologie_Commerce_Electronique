@@ -60,7 +60,10 @@ namespace Boutique_en_ligne.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"));
 
-                    b.Property<int>("ClientId")
+                    b.Property<int?>("ClientId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UtilisateurId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("date_achat")
@@ -75,6 +78,8 @@ namespace Boutique_en_ligne.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ClientId");
+
+                    b.HasIndex("UtilisateurId");
 
                     b.ToTable("Factures");
                 });
@@ -94,6 +99,9 @@ namespace Boutique_en_ligne.Migrations
                         .HasColumnType("int");
 
                     b.Property<int?>("PanierId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("UtilisateurId")
                         .HasColumnType("int");
 
                     b.Property<string>("annee_sortie")
@@ -120,11 +128,16 @@ namespace Boutique_en_ligne.Migrations
                     b.Property<string>("titre")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("vendeurId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("FactureId");
 
                     b.HasIndex("PanierId");
+
+                    b.HasIndex("UtilisateurId");
 
                     b.ToTable("JeuVideos");
                 });
@@ -188,21 +201,6 @@ namespace Boutique_en_ligne.Migrations
                     b.UseTphMappingStrategy();
                 });
 
-            modelBuilder.Entity("JeuVideoUtilisateur", b =>
-                {
-                    b.Property<int>("JeuxVideosId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UtilisateursId")
-                        .HasColumnType("int");
-
-                    b.HasKey("JeuxVideosId", "UtilisateursId");
-
-                    b.HasIndex("UtilisateursId");
-
-                    b.ToTable("JeuVideoUtilisateur");
-                });
-
             modelBuilder.Entity("Boutique_en_ligne.Models.Client", b =>
                 {
                     b.HasBaseType("Boutique_en_ligne.Models.Utilisateur");
@@ -233,39 +231,36 @@ namespace Boutique_en_ligne.Migrations
 
             modelBuilder.Entity("Boutique_en_ligne.Models.Facture", b =>
                 {
-                    b.HasOne("Boutique_en_ligne.Models.Client", "Client")
+                    b.HasOne("Boutique_en_ligne.Models.Client", null)
                         .WithMany("Factures")
-                        .HasForeignKey("ClientId")
+                        .HasForeignKey("ClientId");
+
+                    b.HasOne("Boutique_en_ligne.Models.Utilisateur", "Utilisateur")
+                        .WithMany()
+                        .HasForeignKey("UtilisateurId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Client");
+                    b.Navigation("Utilisateur");
                 });
 
             modelBuilder.Entity("Boutique_en_ligne.Models.JeuVideo", b =>
                 {
-                    b.HasOne("Boutique_en_ligne.Models.Facture", null)
+                    b.HasOne("Boutique_en_ligne.Models.Facture", "Facture")
                         .WithMany("JeuxVideos")
                         .HasForeignKey("FactureId");
 
                     b.HasOne("Boutique_en_ligne.Models.Panier", null)
                         .WithMany("Jeux")
                         .HasForeignKey("PanierId");
-                });
 
-            modelBuilder.Entity("JeuVideoUtilisateur", b =>
-                {
-                    b.HasOne("Boutique_en_ligne.Models.JeuVideo", null)
-                        .WithMany()
-                        .HasForeignKey("JeuxVideosId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasOne("Boutique_en_ligne.Models.Utilisateur", "Utilisateur")
+                        .WithMany("JeuxVideos")
+                        .HasForeignKey("UtilisateurId");
 
-                    b.HasOne("Boutique_en_ligne.Models.Utilisateur", null)
-                        .WithMany()
-                        .HasForeignKey("UtilisateursId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("Facture");
+
+                    b.Navigation("Utilisateur");
                 });
 
             modelBuilder.Entity("Boutique_en_ligne.Models.Facture", b =>
@@ -276,6 +271,11 @@ namespace Boutique_en_ligne.Migrations
             modelBuilder.Entity("Boutique_en_ligne.Models.Panier", b =>
                 {
                     b.Navigation("Jeux");
+                });
+
+            modelBuilder.Entity("Boutique_en_ligne.Models.Utilisateur", b =>
+                {
+                    b.Navigation("JeuxVideos");
                 });
 
             modelBuilder.Entity("Boutique_en_ligne.Models.Client", b =>

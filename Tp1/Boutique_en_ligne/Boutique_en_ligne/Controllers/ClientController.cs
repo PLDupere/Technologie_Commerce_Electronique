@@ -55,7 +55,7 @@ namespace Boutique_en_ligne.Controllers
             // Récupérer les factures du client à partir de la base de données
             var factures = _dbContext.Factures
                 .Include(f => f.JeuxVideos)
-                .Where(f => f.ClientId == userIdInt)
+                .Where(f => f.UtilisateurId == userIdInt)
                 .ToList();
 
             return View(factures);
@@ -83,6 +83,15 @@ namespace Boutique_en_ligne.Controllers
             if (client.mot_de_passe!=confirmerMotDePasse)
             {
                 ViewBag.ErrorMsg = "Les mots de passe ne correspondent pas";
+                return View("~/Views/Home/Inscription.cshtml", client);
+            }
+
+            int age = DateTime.Today.Year - client.date_naissance.Value.Year;
+
+            // Vérifier si l'utilisateur a au moins 18 ans
+            if (age < 18)
+            {
+                ViewBag.AgeErreur = "Vous devez avoir au moins 18 ans pour vous inscrire.";
                 return View("~/Views/Home/Inscription.cshtml", client);
             }
 
@@ -168,6 +177,12 @@ namespace Boutique_en_ligne.Controllers
         public IActionResult EnregistrerCarteCredit(Models.CarteCredit carteCredit, float montant)
         {
             string userId = HttpContext.Session.GetString("UserId");
+
+            if (carteCredit.date < DateTime.Today)
+            {
+                @ViewBag.ErreurDate = "La carte de crédit est expirée.";
+                return View("CarteCredit");
+            }
 
             // Associer la carte de crédit au client connecté
             if (carteCredit != null)
@@ -331,7 +346,7 @@ namespace Boutique_en_ligne.Controllers
 
             var facture = new Facture
             {
-                ClientId = id,
+                UtilisateurId = id,
                 date_achat = DateTime.Now,
                 montant_total = montantTotalAchat,
                 nombre_article = panier.Jeux.Count(j => !j.EstVendu),
@@ -352,6 +367,28 @@ namespace Boutique_en_ligne.Controllers
             return RedirectToAction("Panier");
         }
 
+        public IActionResult Statistiques()
+        {
+            var userId = HttpContext.Session.GetString("UserId");
+            int id = int.Parse(userId);
+
+            var utilisateur = _dbContext.Clients.FirstOrDefault(c => c.Id == id);
+
+            if (utilisateur == null)
+            {
+                return NotFound();
+            }
+
+            var nombreArticlesAchetes = _dbContext.Factures.Where(f => f.UtilisateurId == id).Sum(f => f.nombre_article);
+            var montantTotalDepense = _dbContext.Factures.Where(f => f.UtilisateurId == id).Sum(f => f.montant_total);
+            var nombreFactures = _dbContext.Factures.Count(f => f.UtilisateurId == id);
+
+            ViewBag.NombreArticlesAchetes = nombreArticlesAchetes;
+            ViewBag.MontantTotalDepense = montantTotalDepense;
+            ViewBag.NombreFactures = nombreFactures;
+
+            return View();
+        }
 
 
 
