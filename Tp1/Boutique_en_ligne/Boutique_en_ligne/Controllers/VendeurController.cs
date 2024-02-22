@@ -59,12 +59,14 @@ namespace Boutique_en_ligne.Controllers
                 .SelectMany(f => f.JeuxVideos)
                 .Count();
 
-            // Nombre de clients ayant acheté les jeux du vendeur
+            // Récupérer les identifiants de clients uniques associés aux factures des jeux vendus pour le vendeur
             int nombreClientsAchetantJeuxVendeur = _dbContext.JeuVideos
-                .Where(j => j.vendeurId == vendeurIdInt)
-                .SelectMany(j => j.Facture.JeuxVideos.Select(fj => fj.Utilisateur.Id))
-                .Distinct()
-                .Count();
+                .Where(j => j.vendeurId == vendeurIdInt && j.EstVendu) 
+                .Select(j => j.FactureId) 
+                .Distinct() 
+                .SelectMany(fid => _dbContext.Factures.Where(f => f.Id == fid).Select(f => f.UtilisateurId)) 
+                .Distinct() 
+                .Count(); 
 
             ViewBag.MontantTotalVentes = montantTotalVentesVendeur;
             ViewBag.NombreTotalJeuxVendus = nombreTotalJeuxVendus;

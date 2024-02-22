@@ -22,7 +22,6 @@ namespace Boutique_en_ligne.Models
         public bool EstVendu { get; set; }
 
 
-
         public int? FactureId { get; set; }
 
       

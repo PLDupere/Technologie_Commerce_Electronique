@@ -61,8 +61,6 @@ namespace Boutique_en_ligne.Controllers
             return View(factures);
         }
 
-
-
         // Db context et hashage du mot de passe
         private readonly BoutiqueJeuDbContext _dbContext;
         private readonly IPasswordHasher<Utilisateur> _passwordHasher;
@@ -389,7 +387,6 @@ namespace Boutique_en_ligne.Controllers
 
             return View();
         }
-
 
 
         [HttpDelete]

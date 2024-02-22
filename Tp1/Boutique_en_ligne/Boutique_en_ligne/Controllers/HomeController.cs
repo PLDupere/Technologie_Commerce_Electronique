@@ -68,6 +68,13 @@ namespace Boutique_en_ligne.Controllers
             return View("Authentification"); // Afficher à nouveau le formulaire de connexion
         }
 
+        // Déconnexion de l'utilisateur
+        public IActionResult Deconnecter()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index", "Home");
+        }
+
         // Récupérer les jeux vidéos de la BD suite à une recherche sur la page d'accueil
         [HttpGet]
         public IActionResult RechercheJeuxVideo(string titre, string annee_sortie, string console, string genre, string editeur)
@@ -111,8 +118,5 @@ namespace Boutique_en_ligne.Controllers
             return View("ResultatRecherche", resultatsRecherche);
 
         }
-
-     
-
     }
 }

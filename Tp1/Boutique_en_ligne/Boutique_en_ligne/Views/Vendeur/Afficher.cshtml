@@ -40,7 +40,7 @@
                     <td>
                         @if (!string.IsNullOrEmpty(jeu.capture_ecran))
                         {
-                            var captures = jeu.capture_ecran.Split('|').ToArray();
+                            var captures = jeu.capture_ecran.Split('|').Take(4).ToArray();
 
                             foreach (var captureImage in captures)
                             {
