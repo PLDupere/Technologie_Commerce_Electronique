@@ -37,14 +37,16 @@
                     <td>@jeu.editeur</td>
                     <td><img src="@jeu.pochette_jeu" alt=" " style="max-width: 100px; max-height: 100px;" /></td>
                     <td>
-                        @if (!string.IsNullOrEmpty(jeu.capture_ecran))
+                        @if (jeu.capture_ecran != null && jeu.capture_ecran.Any())
                         {
-                            var captures = jeu.capture_ecran.Split('|').Take(4).ToArray(); 
-
-                            foreach (var captureImage in captures)
-                            {
-                                <img src="@captureImage" alt=" " style="max-width: 100px; max-height: 100px; margin-right: 5px; display: block;" />
-                            }
+                            <ul>
+                                @for (int i = 0; i < Math.Min(4, jeu.capture_ecran.Length); i++)
+                                {
+                                    <li>
+                                        <img src="@jeu.capture_ecran[i]" alt="Capture d'écran">
+                                    </li>
+                                }
+                            </ul>
                         }
                     </td>
 
