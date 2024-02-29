@@ -9,7 +9,7 @@ using Newtonsoft.Json.Linq;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using Newtonsoft.Json;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
-
+using Microsoft.EntityFrameworkCore;
 
 namespace Boutique_en_ligne.Controllers
 {
@@ -58,8 +58,13 @@ namespace Boutique_en_ligne.Controllers
 
             var vendeurId = HttpContext.Session.GetString("UserId");
 
-            // Récupérer les jeux vidéos du vendeur connecté
-            List<Models.JeuVideo> jeuVideos = this._dbContext.JeuVideos.Where(j => j.vendeurId == int.Parse(vendeurId)).ToList();
+            // Récupérer les jeux vidéos du vendeur connecté avec les informations sur les clients qui ont acheté les jeux
+            List<Models.JeuVideo> jeuVideos = this._dbContext.JeuVideos
+                .Include(j => j.Facture)
+                .ThenInclude(f => f.Utilisateur) 
+                .Where(j => j.vendeurId == int.Parse(vendeurId))
+                .ToList();
+
             return View(jeuVideos);
         }
 
@@ -88,6 +93,7 @@ namespace Boutique_en_ligne.Controllers
             if (TempData.TryGetValue("JeuVideoListJson", out object jeuVideoListJsonObj) && jeuVideoListJsonObj is string jeuVideoListJson)
             {
                 List<Models.Afficher> jeuVideoList = JsonConvert.DeserializeObject<List<Models.Afficher>>(jeuVideoListJson);
+             
                 return View(jeuVideoList);
             }
             else

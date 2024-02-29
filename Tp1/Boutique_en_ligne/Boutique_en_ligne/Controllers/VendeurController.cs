@@ -1,6 +1,7 @@
 ﻿using Boutique_en_ligne.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 
 namespace Boutique_en_ligne.Controllers
@@ -129,12 +130,19 @@ namespace Boutique_en_ligne.Controllers
 
         public IActionResult Afficher()
         {
-           
+
             var vendeurId = HttpContext.Session.GetString("UserId");
-            
-            // Récupérer les jeux vidéos du vendeur connecté
-            List<Models.JeuVideo> jeuVideos = this._dbContext.JeuVideos.Where(j => j.vendeurId == int.Parse(vendeurId)).ToList();
+
+            // Récupérer les jeux vidéos du vendeur connecté avec les informations sur les clients qui ont acheté les jeux
+            List<Models.JeuVideo> jeuVideos = this._dbContext.JeuVideos
+                .Include(j => j.Facture)
+                .ThenInclude(f => f.Utilisateur)
+                .Where(j => j.vendeurId == int.Parse(vendeurId))
+                .ToList();
+
             return View(jeuVideos);
+
+
         }
 
 
