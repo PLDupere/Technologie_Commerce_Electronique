@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Boutique_en_ligne.Migrations
 {
     [DbContext(typeof(BoutiqueJeuDbContext))]
-    [Migration("20240222005609_create")]
+    [Migration("20240301183407_create")]
     partial class create
     {
         /// <inheritdoc />

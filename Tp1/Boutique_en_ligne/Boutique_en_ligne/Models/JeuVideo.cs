@@ -13,8 +13,8 @@ namespace Boutique_en_ligne.Models
         public int? Id { get; set; }
         public string? titre { get; set; }
         public string? annee_sortie { get; set; }
-        public string? console { get; set; } //array
-        public string? genre { get; set; } //array
+        public string? console { get; set; } 
+        public string? genre { get; set; } 
         public string? editeur { get; set; }
         public string? pochette_jeu { get; set; }
         public string? capture_ecran { get; set; }
